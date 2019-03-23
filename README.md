@@ -1,2 +1,2 @@
 # Everybody-Eats
-Everybody Eats 
+Everybody Eats Group Project 
