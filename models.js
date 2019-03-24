@@ -61,7 +61,7 @@ const Event = sequelize.define( 'Event', {
   event_name: Sequelize.STRING,
   event_location: Sequelize.STRING,
   event_date: Sequelize.DATE,
-  event_details: Sequelize.STRING,
+  event_details: Sequelize.TEXT,
 }, {
   timestamps: false
 });
