@@ -66,6 +66,9 @@ const Event = sequelize.define( 'Event', {
   timestamps: false
 });
 
+// one to many
+User.hasMany(Event, {as: 'host'})
+
 // many to many
 User.belongsToMany(Event, { through: 'event_users' });
 Event.belongsToMany(User, { through: 'event_users' });
