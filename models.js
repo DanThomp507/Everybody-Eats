@@ -62,12 +62,15 @@ const Event = sequelize.define( 'Event', {
   event_location: Sequelize.STRING,
   event_date: Sequelize.DATE,
   event_details: Sequelize.TEXT,
-}, {
-  timestamps: false
+  host_id: {
+    type: Sequelize.INTEGER,
+    references: {
+      model: User,
+      key: 'id'
+    }
+  },
 });
 
-// one to many
-User.hasMany(Event, {as: 'host'})
 
 // many to many
 User.belongsToMany(Event, { through: 'event_users' });
