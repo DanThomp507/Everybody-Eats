@@ -6,11 +6,13 @@ class UserForm extends Component {
     super();
 
     this.state = {
+      registerFormData: {
       username: "",
       first_name: "",
       last_name: "",
       email: "",
       password: ""
+      }
     };
     this.handleChange = this.handleChange.bind(this);
   }

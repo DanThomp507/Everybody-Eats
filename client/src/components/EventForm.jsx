@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-// import { createNewEvent } from './services/users-helper.js'
+import { createNewEvent } from '../services/users.js'
 import { withRouter, Link } from "react-router-dom";
 
 class EventForm extends Component {
@@ -28,8 +28,8 @@ handleEventFormChange(e) {
 }
 async handleSubmit(e){
   e.preventDefault();
-  // const resp = await createNewEvent(this.props.match.params.id, this.state.eventData);
-  // console.log(resp);
+  const resp = await createNewEvent(this.props.match.params.id, this.state.eventData);
+  console.log(resp);
   this.setState(prevState => ({
     eventData: {
       ...prevState.eventData
