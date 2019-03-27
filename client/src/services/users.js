@@ -5,23 +5,24 @@ const createNewUser = async user => {
   console.log(createNewUser)
   const respData = await api.post(`${BASE_URL}/users/register`, user);
   console.log("this is create user: resp", respData);
-  return respData;
+  return respData.data;
 };
 const editUser = async (id, edits) => {
   console.log("making an edit request with this data", edits);
   const respData = await api.put(`/users/${id}/edit`, edits);
   console.log("this is edit user: resp", respData);
-  return respData;
+  return respData.data;
 };
 const loginUser = async user => {
   const respData = await api.post(`${BASE_URL}/users/login`, user);
+  updateToken(respData.data.token)
   console.log("this is login user: resp", respData);
-  return respData;
+  return respData.data;
 };
 const createNewEvent = async (ev, user_id) => {
   const respData = await api.post(`${BASE_URL}/events/${user_id}/new`, ev);
   console.log("this is create event: resp", respData);
-  return respData;
+  return respData.data;
 };
 const fetchAllEvents = async () => {
   const respData = await api.get(`/events`);

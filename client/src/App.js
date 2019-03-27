@@ -27,36 +27,36 @@ class App extends Component {
       password: "",
     },
     loginFormData: {
-        email: "",
-        password: ""
-      },
-      currentUser: null,
-      toggleLogin: true,
-      token: "",
-      userData: {},
-      eventData: {}
-    }
-    this.handleLogin = this.handleLogin.bind(this);
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleLoginFormChange = this.handleLoginFormChange.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-    this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
+      email: "",
+      password: ""
+    },
+    currentUser: null,
+    toggleLogin: true,
+    token: "",
+    userData: {},
+    eventData: {}
   }
+  this.handleLogin = this.handleLogin.bind(this);
+  this.handleLoginClick = this.handleLoginClick.bind(this);
+  this.handleLoginFormChange = this.handleLoginFormChange.bind(this);
+  this.handleLogout = this.handleLogout.bind(this);
+  this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
+  this.handleRegister = this.handleRegister.bind(this);
+  this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
+  }
+
   async handleLogin(e) {
   e.preventDefault();
   const userData = await loginUser(this.state.loginFormData);
   console.log("userdata from handleLogin", userData);
   this.setState({
-    currentUser: userData.data.user.username,
-    token: userData.data.token,
+    currentUser: userData.user.username,
+    token: userData.token,
     loginFormData: {
       email: "",
       password: ""
     }
   });
-  localStorage.setItem("jwt", userData.data.token);
   this.props.history.push(`/`);
 }
 

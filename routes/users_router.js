@@ -45,10 +45,10 @@ usersRouter.post("/register", async (req, res, next) => {
 
 usersRouter.post("/login", async (req, res, next) => {
   try {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
     const user = await User.findOne({
       where: {
-        username
+        email
       }
     });
     const isPassValid = await compare(password, user.dataValues.password_digest);
