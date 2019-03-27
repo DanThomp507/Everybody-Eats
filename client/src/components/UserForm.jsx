@@ -1,79 +1,82 @@
-import React, { Component } from "react";
-import "../App.css";
+import React from "react";
 
-class UserForm extends Component {
-  constructor() {
-    super();
+export default props => {
+  const {
+    show,
+    toggle,
+    first_name,
+    last_name,
+    username,
+    email,
+    password,
+    onChange,
+    onSubmit,
+    onClick,
+    submitButtonText,
+    backButtonText,
+    toggleLocal,
+    passwordAsk,
+    title,
+    userData
+  } = props;
 
-    this.state = {
-      registerFormData: {
-      username: "",
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: ""
-      }
-    };
-    this.handleChange = this.handleChange.bind(this);
-  }
+  const showRegister = !show && !toggle;
+  console.log("register user form props", userData);
+  return (
+    showRegister && (
+      <div className="user-form-container">
+      <h1>Register</h1>
+      <form>
+        <input
+          onChange={onChange}
+          type="text"
+          placeholder="First Name"
+          name="first_name"
+          value={first_name}
+        />
 
-  handleChange(e) {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value
-    })
-  };
+        <input
+          onChange={onChange}
+          type="text"
+          placeholder="Last Name"
+          name="last_name"
+          value={last_name}
+        />
 
-  render() {
-    return (
-      <div>
-        <h1>Register</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            onChange={this.handleChange}
-            type="text"
-            placeholder="First Name"
-            name="first_name"
-            value={this.first_name}
-          />
+        <input
+          onChange={onChange}
+          type="text"
+          placeholder="Email"
+          name="email"
+          value={email}
+        />
 
-          <input
-            onChange={this.handleChange}
-            type="text"
-            placeholder="Last Name"
-            name="last_name"
-            value={this.last_name}
-          />
-
-          <input
-            onChange={this.handleChange}
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={this.email}
-          />
-
-          <input
-            onChange={this.handleChange}
-            type="text"
-            placeholder="Username"
-            name="username"
-            value={this.username}
-          />
-
-          <input
-            onChange={this.handleChange}
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={this.password}
-          />
-
-          <input value="Submit" type="submit" />
+        <input
+          onChange={onChange}
+          type="text"
+          placeholder="Username"
+          name="username"
+          value={username}
+        />
+        {passwordAsk && (
+          <>
+        <input
+          onChange={onChange}
+          type="password"
+          placeholder="Password"
+          name="password"
+          value={password}
+        />
+        </>
+      )}
+          <button type="submit" onClick={onSubmit}>
+            {submitButtonText}
+          </button>
+          <button type="submit" onClick={onClick}>
+            {backButtonText}
+          </button>
         </form>
       </div>
-    );
-  }
-}
-
-export default UserForm;
+    )
+  );
+};

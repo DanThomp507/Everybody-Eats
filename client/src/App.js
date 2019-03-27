@@ -18,7 +18,13 @@ class App extends Component {
   super(props);
 
   this.state = {
-    registerFormData: {},
+    registerFormData: {
+      first_name: "",
+      last_name: "",
+      username: "",
+      email: "",
+      password: "",
+    },
     loginFormData: {
         email: "",
         password: ""
@@ -27,13 +33,15 @@ class App extends Component {
       toggleLogin: true,
       token: "",
       userData: {},
-      eventData: {},
+      eventData: {}
     }
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLoginFormChange = this.handleLoginFormChange.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+    this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
   }
   async handleLogin(e) {
   e.preventDefault();
@@ -88,6 +96,26 @@ handleRegisterFormChange(e) {
     }
   }));
 }
+async handleRegister(e) {
+  e.preventDefault();
+  const userData = await createNewUser(this.state.registerFormData);
+  console.log(userData);
+  this.setState((prevState, newState) => ({
+    currentUser: userData.data.user.username,
+    userData: userData.data.user,
+    token: userData.data.token,
+    registerFormData: {
+      username: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: ""
+    }
+  }));
+  localStorage.setItem("jwt", userData.data.token);
+  this.props.history.push(`/`);
+}
+
 handleLogout() {
   localStorage.removeItem("jwt");
   this.setState({
@@ -120,12 +148,15 @@ handleLogout() {
             />
             <UserForm
               {...props}
+              userData={""}
               title={"Register User"}
               onClick={this.handleLoginClick}
               show={this.state.currentUser}
               toggle={this.state.toggleLogin}
               onChange={this.handleRegisterFormChange}
               onSubmit={this.handleRegister}
+              first_name={this.state.registerFormData.first_name}
+              last_name={this.state.registerFormData.last_name}
               username={this.state.registerFormData.username}
               email={this.state.registerFormData.email}
               password={this.state.registerFormData.password}
