@@ -3,38 +3,41 @@ const { User } = require("../models");
 const { hash, compare, encode, restrict } = require("../auth");
 
 const usersRouter = Router();
-const buildAuthResponse = user => {
-  const token_data = {
-    id: user.id,
-    username: user.username,
-    email: user.email,
-  };
-
-  const token = encode(token_data);
-  return {
-    user: token_data,
+const buildAuthResponse = async (user) => {
+  const token = await encode(user);
+  const resp = {
+    user,
     token
-  };
+  }
+  return resp
 };
 
 usersRouter.get("/verify", restrict, async (req, res) => {
-  res.json({ user: res.locals.user });
+  const user = res.locals.user.dataValues
+  delete user.password_digest
+  console.log(user);
+  res.json(user);
 });
 
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, email, password } = req.body;
+    const { first_name, last_name, username, email, password } = req.body;
     const password_digest = await hash(password);
 
     const user = await User.create({
+      first_name,
+      last_name,
       username,
       email,
       password_digest
     });
-    const respData = buildAuthResponse(user);
-    res.json({ ...respData });
-  } catch (err) {
-    next(err);
+
+    delete user.dataValues.password_digest
+
+    const respData = await buildAuthResponse(user.dataValues);
+    res.json(respData);
+  } catch (e) {
+    next(e);
     console.log("did not register user");
     res.status(500).send(e.message);
   }
@@ -48,11 +51,11 @@ usersRouter.post("/login", async (req, res, next) => {
         username
       }
     });
-    const isPassValid = await compare(password, user.password_digest);
+    const isPassValid = await compare(password, user.dataValues.password_digest);
     if (isPassValid) {
-      const { password_digest, ...userData } = user;
-      const respData = buildAuthResponse(user);
-      res.json({ ...respData });
+      delete user.dataValues.password_digest
+      const respData = await buildAuthResponse(user.dataValues);
+      res.json(respData);
     } else {
       res.status(401).send("Invalid credentials");
     }
