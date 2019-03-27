@@ -43,7 +43,7 @@ class App extends Component {
   this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
   this.handleRegister = this.handleRegister.bind(this);
   this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
-  }
+}
 
   async handleLogin(e) {
   e.preventDefault();
@@ -55,7 +55,8 @@ class App extends Component {
     loginFormData: {
       email: "",
       password: ""
-    }
+    },
+    userData: userData.user
   });
   this.props.history.push(`/`);
 }
@@ -102,9 +103,9 @@ async handleRegister(e) {
   const userData = await createNewUser(this.state.registerFormData);
   console.log(userData);
   this.setState((prevState, newState) => ({
-    currentUser: userData.data.user.username,
-    userData: userData.data.user,
-    token: userData.data.token,
+    currentUser: userData.user.username,
+    userData: userData.user,
+    token: userData.token,
     registerFormData: {
       username: "",
       first_name: "",
@@ -113,7 +114,7 @@ async handleRegister(e) {
       password: ""
     }
   }));
-  localStorage.setItem("jwt", userData.data.token);
+  localStorage.setItem("jwt", userData.token);
   this.props.history.push(`/`);
 }
 
