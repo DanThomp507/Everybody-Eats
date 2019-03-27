@@ -10,7 +10,8 @@ import {
   createNewUser,
   editUser,
   loginUser,
-  createNewEvent
+  createNewEvent,
+  fetchAllEvents
 } from "./services/users";
 
 class App extends Component {
