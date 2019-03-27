@@ -32,7 +32,6 @@ class App extends Component {
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleLoginFormChange = this.handleLoginFormChange.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
     this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
   }
   async handleLogin(e) {
@@ -100,7 +99,6 @@ handleLogout() {
   render() {
     return (
       <div className="Main-app-body">
-      <div className="header-container">
         <h1 className="main-title">
           <Link to="/">Everybody Eats</Link>
         </h1>
@@ -129,8 +127,6 @@ handleLogout() {
               onSubmit={this.handleRegister}
               username={this.state.registerFormData.username}
               email={this.state.registerFormData.email}
-              avatar={this.state.registerFormData.avatar}
-              isLocal={this.state.registerFormData.isLocal}
               password={this.state.registerFormData.password}
               submitButtonText="Submit"
               backButtonText="Back to Login"
@@ -160,7 +156,6 @@ handleLogout() {
       />
 
         </div>
-      </div>
     );
   }
 }
