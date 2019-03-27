@@ -58,7 +58,7 @@ class App extends Component {
     },
     userData: userData.user
   });
-  this.props.history.push(`/`);
+  this.props.history.push(`/user/${this.state.userData.id}/username/${this.state.userData.username}`);
 }
 
 handleLoginClick(e) {
@@ -115,7 +115,7 @@ async handleRegister(e) {
     }
   }));
   localStorage.setItem("jwt", userData.token);
-  this.props.history.push(`/`);
+  this.props.history.push(`/user/${this.state.userData.id}/username/${this.state.userData.username}`);
 }
 
 handleLogout() {
