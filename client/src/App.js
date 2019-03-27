@@ -5,6 +5,7 @@ import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
 import EventForm from './components/EventForm';
 import LogoutForm from './components/LogoutForm';
+import Footer from './components/Footer';
 import {
   createNewUser,
   editUser,
@@ -107,7 +108,7 @@ handleLogout() {
         path="/"
         render={props => (
           <>
-            <UserForm
+            <LoginForm
               {...props}
               show={this.state.currentUser}
               toggle={this.state.toggleLogin}
@@ -117,7 +118,7 @@ handleLogout() {
               password={this.state.loginFormData.password}
               onClick={this.handleLoginClick}
             />
-            <LoginForm
+            <UserForm
               {...props}
               title={"Register User"}
               onClick={this.handleLoginClick}
@@ -154,7 +155,11 @@ handleLogout() {
           <LogoutForm {...props} handleLogout={this.handleLogout} />
         )}
       />
-
+      <Footer
+          handleLogout={this.handleLogout}
+          show={this.state.currentUser}
+          userData={this.state.userData}
+        />
         </div>
     );
   }

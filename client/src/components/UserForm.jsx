@@ -27,6 +27,7 @@ class UserForm extends Component {
   render() {
     return (
       <div>
+        <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleChange}
