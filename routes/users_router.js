@@ -17,13 +17,13 @@ const buildAuthResponse = user => {
   };
 };
 
-usersRouter.get("/verify", async (req, res) => {
+usersRouter.get("/verify", restrict, async (req, res) => {
   res.json({ user: res.locals.user });
 });
 
 usersRouter.post("/register", async (req, res, next) => {
   try {
-    const { username, email, password, avatar, isLocal } = req.body;
+    const { username, email, password } = req.body;
     const password_digest = await hash(password);
 
     const user = await User.create({
@@ -51,7 +51,6 @@ usersRouter.post("/login", async (req, res, next) => {
     const isPassValid = await compare(password, user.password_digest);
     if (isPassValid) {
       const { password_digest, ...userData } = user;
-      console.log("ISPASSVALID : user", user);
       const respData = buildAuthResponse(user);
       res.json({ ...respData });
     } else {
@@ -68,7 +67,6 @@ usersRouter.put("/:user_id/edit", restrict, async (req, res, next) => {
     const { user_id } = req.params;
     const user = await User.findByPk(user_id);
     const newUser = await user.update(req.body);
-    console.log("newUser", newUser);
     res.json({ newUser });
   } catch (e) {
     next(e);
@@ -103,7 +101,7 @@ usersRouter.get('/:user_id/events/:event_id', restrict, async (req, res, next) =
 // find events hosted
 usersRouter.get('/:user_id/events/host', restrict, async (req, res, next) => {
   try {
-    const { user_id } = req.params:
+    const { user_id } = req.params;
     const events = await Event.findAll({
       where: {
         host_id: user_id

@@ -5,7 +5,7 @@ const { restrict } = require('../auth');
 const eventsRouter = Router();
 
 // create event
-eventsRouter.post('/:user_id/new'), restrict, async (req, res, next) => {
+eventsRouter.post('/:user_id/new'), async (req, res, next) => {
   try {
     const { user_id, event_name, event_location, event_date, event_details } = req.body;
     const newEvent = await Event.create({
@@ -35,15 +35,15 @@ eventsRouter.get('/', async (req, res, next) => {
 eventsRouter.get('/:event_id', async (req, res, next) => {
   try {
     const { event_id } = req.params;
-    const event = await Event.findByPk(event_id);
-    res.json(event)
+    const events = await Event.findByPk(event_id);
+    res.json(events)
   } catch(e) {
     next(e);
   }
 })
 
 // add user to event
-eventsRouter.post('/:event_id/user/:user_id/add', async (req, res, next) => {
+eventsRouter.post('/:event_id/user/:user_id/add', restrict, async (req, res, next) => {
   try {
     const { event_id, user_id } = req.params
     const event = await Event.findByPk(event_id);
@@ -56,7 +56,7 @@ eventsRouter.post('/:event_id/user/:user_id/add', async (req, res, next) => {
 });
 
 // remove user from event
-eventsRouter.delete('/:id/user/:user_id/delete', async (req, res, next) => {
+eventsRouter.delete('/:event_id/user/:user_id/delete', restrict, async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.user_id)
     console.log(user.dataValues);

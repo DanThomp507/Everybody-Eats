@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { api, updateToken } from './api_helper';
+const { api, updateToken } = require('./api_helper');
 const BASE_URL = "https://localhost:9000";
 
 const createNewUser = async user => {
@@ -23,6 +22,9 @@ const createNewEvent = async (ev, user_id) => {
   console.log("this is create event: resp", respData);
   return respData;
 };
+
+
+
 export {
   createNewUser,
   editUser,
