@@ -5,7 +5,7 @@ const { restrict } = require('../auth');
 const eventsRouter = Router();
 
 // create event
-eventsRouter.post('/:user_id/new'), async (req, res, next) => {
+eventsRouter.post('/', async (req, res, next) => {
   try {
     const { user_id, event_name, event_location, event_date, event_details } = req.body;
     const newEvent = await Event.create({
@@ -17,9 +17,9 @@ eventsRouter.post('/:user_id/new'), async (req, res, next) => {
     })
     res.json(newEvent)
   } catch(e) {
-    next(e)
+    next(e);
   }
-}
+});
 
 // gets all events
 eventsRouter.get('/', async (req, res, next) => {
@@ -43,7 +43,7 @@ eventsRouter.get('/:event_id', async (req, res, next) => {
 })
 
 // add user to event
-eventsRouter.post('/:event_id/user/:user_id/add', restrict, async (req, res, next) => {
+eventsRouter.post('/:event_id/user/:user_id/add', async (req, res, next) => {
   try {
     const { event_id, user_id } = req.params
     const event = await Event.findByPk(event_id);
@@ -56,11 +56,11 @@ eventsRouter.post('/:event_id/user/:user_id/add', restrict, async (req, res, nex
 });
 
 // remove user from event
-eventsRouter.delete('/:event_id/user/:user_id/delete', restrict, async (req, res, next) => {
+eventsRouter.delete('/:event_id/user/:user_id/delete', async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.user_id)
     console.log(user.dataValues);
-    const event = await Event.findByPk(req.params.id, {
+    const event = await Event.findByPk(req.params.event_id, {
       include: [
         {
           model: User
@@ -76,4 +76,15 @@ eventsRouter.delete('/:event_id/user/:user_id/delete', restrict, async (req, res
   }
 });
 
-module.exports = eventsRouter
+// find event guests
+eventsRouter.get('/guests/:event_id', async (req, res, next) => {
+  try {
+    const event = await Event.findByPk(req.params.event_id);
+    const guests = await event.getUsers();
+    res.json(guests)
+  }catch(e) {
+    next(e)
+  }
+})
+
+module.exports = eventsRouter;

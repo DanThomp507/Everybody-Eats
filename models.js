@@ -62,13 +62,7 @@ const Event = sequelize.define( 'Event', {
   event_location: Sequelize.STRING,
   event_date: Sequelize.DATE,
   event_details: Sequelize.TEXT,
-  host_id: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: User,
-      key: 'id'
-    }
-  },
+  host_id: Sequelize.INTEGER,
 });
 
 
