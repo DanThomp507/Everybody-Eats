@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { User } = require("../models");
+const { User, Event } = require("../models");
 const { hash, compare, encode, restrict } = require("../auth");
 
 const usersRouter = Router();
