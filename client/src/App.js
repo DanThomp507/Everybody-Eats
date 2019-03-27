@@ -44,6 +44,7 @@ class App extends Component {
   this.handleRegister = this.handleRegister.bind(this);
   this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
 }
+
   async handleLogin(e) {
   e.preventDefault();
   const userData = await loginUser(this.state.loginFormData);
