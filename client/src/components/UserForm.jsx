@@ -6,11 +6,13 @@ class UserForm extends Component {
     super();
 
     this.state = {
+      registerFormData: {
       username: "",
       first_name: "",
       last_name: "",
       email: "",
       password: ""
+      }
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -25,6 +27,7 @@ class UserForm extends Component {
   render() {
     return (
       <div>
+        <h1>Register</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleChange}
