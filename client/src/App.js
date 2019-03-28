@@ -163,7 +163,6 @@ async userEvents() {
               />
             <UserForm
               {...props}
-              currentUser={this.state.currentUser}
               title={"Register User"}
               onClick={this.handleLoginClick}
               show={this.state.currentUser}
