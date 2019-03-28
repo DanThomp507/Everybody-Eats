@@ -5,6 +5,7 @@ import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
 import EventForm from './components/EventForm';
 import LogoutForm from './components/LogoutForm';
+import UserProfile from './components/UserProfile';
 import Footer from './components/Footer';
 
 import {
@@ -12,7 +13,8 @@ import {
   editUser,
   loginUser,
   createNewEvent,
-  fetchAllEvents
+  fetchAllEvents,
+  fetchUserEvents
 } from "./services/users";
 
 class App extends Component {
@@ -33,7 +35,8 @@ class App extends Component {
     },
     toggleLogin: true,
     currentUser: {},
-    currentEvent: {}
+    currentEvent: {},
+    eventsList: [],
   }
   this.handleLogin = this.handleLogin.bind(this);
   this.handleLoginClick = this.handleLoginClick.bind(this);
@@ -42,20 +45,22 @@ class App extends Component {
   this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
   this.handleRegister = this.handleRegister.bind(this);
   this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
+  this.userEvents = this.userEvents.bind(this);
 }
 
   async handleLogin(e) {
   e.preventDefault();
-  const userData = await loginUser(this.state.loginFormData);
-  console.log("userdata from handleLogin", userData);
+  const currentUser = await loginUser(this.state.loginFormData);
+  console.log("userdata from handleLogin", currentUser);
   this.setState({
-    currentUser: userData.user,
     loginFormData: {
       email: "",
       password: ""
     },
+    currentUser: currentUser.user
   });
-  this.props.history.push(`/`);
+  this.userEvents()
+  this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
 handleLoginClick(e) {
@@ -98,10 +103,10 @@ handleRegisterFormChange(e) {
 }
 async handleRegister(e) {
   e.preventDefault();
-  const userData = await createNewUser(this.state.registerFormData);
-  console.log(userData);
+  const currentUser = await createNewUser(this.state.registerFormData);
+  console.log(currentUser);
   this.setState((prevState, newState) => ({
-    currentUser: userData.user,
+    currentUser: currentUser.user,
     registerFormData: {
       username: "",
       first_name: "",
@@ -110,7 +115,8 @@ async handleRegister(e) {
       password: ""
     }
   }));
-  this.props.history.push(`/`);
+  this.userEvents()
+  this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
 handleLogout() {
@@ -122,6 +128,14 @@ handleLogout() {
   this.props.history.push(`/`);
 }
 
+async userEvents() {
+  const eventsList = await fetchUserEvents(this.state.currentUser.id);
+  debugger
+  this.setState({
+    eventsList: eventsList
+  });
+}
+
   render() {
     return (
       <div className="Main-app-body">
@@ -129,20 +143,20 @@ handleLogout() {
           <Link to="/">Everybody Eats</Link>
         </h1>
         <Route
-        exact
-        path="/"
-        render={props => (
-          <>
-            <LoginForm
-              {...props}
-              show={this.state.currentUser}
-              toggle={this.state.toggleLogin}
-              onChange={this.handleLoginFormChange}
-              onSubmit={this.handleLogin}
-              email={this.state.loginFormData.email}
-              password={this.state.loginFormData.password}
-              onClick={this.handleLoginClick}
-            />
+          exact
+          path="/"
+          render={props => (
+            <>
+              <LoginForm
+                {...props}
+                show={this.state.currentUser}
+                toggle={this.state.toggleLogin}
+                onChange={this.handleLoginFormChange}
+                onSubmit={this.handleLogin}
+                email={this.state.loginFormData.email}
+                password={this.state.loginFormData.password}
+                onClick={this.handleLoginClick}
+              />
             <UserForm
               {...props}
               currentUser={this.state.currentUser}
@@ -162,13 +176,25 @@ handleLogout() {
               passwordAsk={"y"}
               toggleLocal={this.state.handleToggleLocalRegister}
             />
+            </>
+          )}
+        />
+      <Route
+        exact
+        path="/user/:user_id/username/:user_username"
+        render={props => (
+            <UserProfile
+              {...props}
+              currentUser={this.state.currentUser}
+              eventsList={this.state.eventsList}
+            />
           </>
         )}
       />
         <Route
-        exact
-        path="events/:user_id/new"
-        render={() => (
+          exact
+          path="/events/:user_id/new"
+          render={() => (
             <EventForm
               eventData={this.state.eventData}
               onChange={this.handleEventFormChange}
@@ -177,18 +203,18 @@ handleLogout() {
           )}
         />
         <Route
-        exact
-        path="/logout"
-        render={props => (
-          <LogoutForm {...props} handleLogout={this.handleLogout} />
-        )}
-      />
-      <Footer
+          exact
+          path="/logout"
+          render={props => (
+            <LogoutForm {...props} handleLogout={this.handleLogout} />
+          )}
+        />
+        <Footer
           handleLogout={this.handleLogout}
           show={this.state.currentUser}
-          userData={this.state.userData}
+          currentUser={this.state.currentUser}
         />
-        </div>
+      </div>
     );
   }
 }

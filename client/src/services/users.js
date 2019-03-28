@@ -17,10 +17,14 @@ const loginUser = async user => {
   console.log("this is login user: resp", respData);
   return respData.data;
 };
-
+const fetchUserEvents = async user => {
+  const respData = await api.get(`users/${user}/events`)
+  return respData.data;
+}
 
 export {
   createNewUser,
   editUser,
   loginUser,
+  fetchUserEvents
 }
