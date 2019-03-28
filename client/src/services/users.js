@@ -45,9 +45,7 @@ const fetchUserEvents = async user => {
   return respData.data;
 }
 const joinEvent = async (user_id, event_id) => {
-  debugger
-  const respData = await api.post(`/events/#{event_id}/user/#{user_id}/add`);
-  return respData.data;
+  await api.post(`/events/${event_id}/user/${user_id}/add`);
 };
 
 export {

@@ -56,10 +56,11 @@ class App extends Component {
 
   async componentDidMount() {
     const currentUser = await verifyToken();
+    const eventsList =  await this.userEvents(currentUser.id)
     this.setState({
-      currentUser
+      currentUser,
+      eventsList
     })
-    await this.userEvents()
   }
 
   async handleLogin(e) {
@@ -73,7 +74,6 @@ class App extends Component {
     },
     currentUser: currentUser.user
   });
-  this.userEvents()
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
@@ -129,7 +129,6 @@ async handleRegister(e) {
       password: ""
     }
   }));
-  this.userEvents()
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
@@ -142,11 +141,9 @@ handleLogout() {
   this.props.history.push(`/`);
 }
 
-async userEvents() {
-  const eventsList = await fetchUserEvents(this.state.currentUser.id);
-  this.setState({
-    eventsList,
-  });
+async userEvents(id) {
+  const eventsList = await fetchUserEvents(id);
+  return eventsList
 }
 
   render() {

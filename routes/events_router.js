@@ -4,22 +4,6 @@ const { restrict } = require('../auth');
 
 const eventsRouter = Router();
 
-// create event
-eventsRouter.post('/', restrict, async (req, res, next) => {
-  try {
-    const { event_name, event_location, event_date, event_details } = req.body;
-    const newEvent = await Event.create({
-      event_name,
-      event_location,
-      event_date,
-      event_details,
-      host_id: res.locals.user.id
-    })
-    res.json(newEvent)
-  } catch(e) {
-    next(e);
-  }
-});
 
 // gets all events
 eventsRouter.get('/', async (req, res, next) => {
@@ -76,6 +60,22 @@ eventsRouter.delete('/:event_id/user/:user_id/delete', async (req, res, next) =>
   }
 });
 
+// create event
+eventsRouter.post('/', restrict, async (req, res, next) => {
+  try {
+    const { event_name, event_location, event_date, event_details } = req.body;
+    const newEvent = await Event.create({
+      event_name,
+      event_location,
+      event_date,
+      event_details,
+      host_id: res.locals.user.id
+    })
+    res.json(newEvent)
+  } catch(e) {
+    next(e);
+  }
+});
 // find event guests
 eventsRouter.get('/guests/:event_id', async (req, res, next) => {
   try {
