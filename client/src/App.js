@@ -6,6 +6,7 @@ import LoginForm from "./components/LoginForm";
 import EventForm from './components/EventForm';
 import LogoutForm from './components/LogoutForm';
 import Footer from './components/Footer';
+
 import {
   createNewUser,
   editUser,
@@ -30,11 +31,9 @@ class App extends Component {
       email: "",
       password: ""
     },
-    currentUser: null,
     toggleLogin: true,
-    token: "",
-    userData: {},
-    eventData: {}
+    currentUser: {},
+    currentEvent: {}
   }
   this.handleLogin = this.handleLogin.bind(this);
   this.handleLoginClick = this.handleLoginClick.bind(this);
@@ -50,13 +49,11 @@ class App extends Component {
   const userData = await loginUser(this.state.loginFormData);
   console.log("userdata from handleLogin", userData);
   this.setState({
-    currentUser: userData.user.username,
-    token: userData.token,
+    currentUser: userData.user,
     loginFormData: {
       email: "",
       password: ""
     },
-    userData: userData.user
   });
   this.props.history.push(`/`);
 }
@@ -79,6 +76,7 @@ handleToggleLocalRegister(e) {
     }
   }));
 }
+
 handleLoginFormChange(e) {
   const { name, value } = e.target;
   this.setState(prevState => ({
@@ -103,9 +101,7 @@ async handleRegister(e) {
   const userData = await createNewUser(this.state.registerFormData);
   console.log(userData);
   this.setState((prevState, newState) => ({
-    currentUser: userData.user.username,
-    userData: userData.user,
-    token: userData.token,
+    currentUser: userData.user,
     registerFormData: {
       username: "",
       first_name: "",
@@ -114,14 +110,13 @@ async handleRegister(e) {
       password: ""
     }
   }));
-  localStorage.setItem("jwt", userData.token);
   this.props.history.push(`/`);
 }
 
 handleLogout() {
-  localStorage.removeItem("jwt");
+  localStorage.removeItem("authToken");
   this.setState({
-    currentUser: null,
+    currentUser: {},
     toggleLogin: true
   });
   this.props.history.push(`/`);
@@ -150,7 +145,7 @@ handleLogout() {
             />
             <UserForm
               {...props}
-              userData={""}
+              currentUser={this.state.currentUser}
               title={"Register User"}
               onClick={this.handleLoginClick}
               show={this.state.currentUser}
