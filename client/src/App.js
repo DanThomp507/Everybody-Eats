@@ -59,7 +59,7 @@ class App extends Component {
     this.setState({
       currentUser
     })
-
+    await this.userEvents()
   }
 
   async handleLogin(e) {
