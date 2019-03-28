@@ -42,6 +42,7 @@ class App extends Component {
     toggleLogin: true,
     currentUser: {},
     currentEvent: {},
+    eventData: {},
     eventsList: [],
   }
   this.handleLogin = this.handleLogin.bind(this);
