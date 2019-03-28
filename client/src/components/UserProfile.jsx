@@ -15,9 +15,16 @@ const UserProfile = props => {
             )
           }>Edit User
       </button>
-      <h1>Attending:</h1>
+      <h2>Attending:</h2>
       <EventsList
         eventsList={props.eventsList}
+      />
+      <h2>Hosting:</h2>
+      <EventsList
+        eventsList={props.eventsList.filter((event) => {
+    
+          return props.match.params.user_id == event.host_id
+        } )}
       />
     </div>
   );

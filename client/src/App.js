@@ -130,9 +130,8 @@ handleLogout() {
 
 async userEvents() {
   const eventsList = await fetchUserEvents(this.state.currentUser.id);
-  debugger
   this.setState({
-    eventsList: eventsList
+    eventsList,
   });
 }
 
@@ -187,6 +186,7 @@ async userEvents() {
               {...props}
               currentUser={this.state.currentUser}
               eventsList={this.state.eventsList}
+              hostingEventsList={this.state.hostingEventsList}
             />
         )}
       />
