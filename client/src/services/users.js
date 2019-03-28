@@ -14,13 +14,13 @@ const editUser = async (id, edits) => {
   return respData.data;
 };
 const loginUser = async user => {
-  const respData = await api.post(`${BASE_URL}/users/login`, user);
+  const respData = await api.post(`/users/login`, user);
   updateToken(respData.data.token)
   console.log("this is login user: resp", respData);
   return respData.data;
 };
 const createNewEvent = async (ev, user_id) => {
-  const respData = await api.post(`${BASE_URL}/events/${user_id}/new`, ev);
+  const respData = await api.post(`/events/${user_id}/new`, ev);
   console.log("this is create event: resp", respData);
   return respData.data;
 };
@@ -33,11 +33,15 @@ const fetchEventData = async ev => {
   const respData = await api.get(`/events/${ev}`);
   return respData.data;
 };
+const fetchUserEvents = async user => {
+  const respData = await api.get(`users/${user}/events`)
+}
 
 export {
   createNewUser,
   editUser,
   loginUser,
   createNewEvent,
-  fetchAllEvents
+  fetchAllEvents,
+  fetchUserEvents
 }
