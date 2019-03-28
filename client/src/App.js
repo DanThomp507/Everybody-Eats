@@ -13,11 +13,14 @@ import {
   createNewUser,
   editUser,
   loginUser,
-  createNewEvent,
-  fetchAllEvents,
-  fetchEventUsers,
   fetchUserEvents
 } from "./services/users";
+import {
+  createNewEvent,
+  fetchAllEvents,
+  fetchEvent,
+  fetchEventUsers,
+} from "./services/events";
 
 class App extends Component {
   constructor(props) {
