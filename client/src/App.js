@@ -4,6 +4,7 @@ import { Link, Route, withRouter } from "react-router-dom";
 import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
 import EventForm from './components/EventForm';
+import EventPage from './components/EventPage';
 import LogoutForm from './components/LogoutForm';
 import Footer from './components/Footer';
 import {
@@ -11,7 +12,8 @@ import {
   editUser,
   loginUser,
   createNewEvent,
-  fetchAllEvents
+  fetchAllEvents,
+  fetchEventUsers,
 } from "./services/users";
 
 class App extends Component {
@@ -131,7 +133,7 @@ handleLogout() {
     return (
       <div className="Main-app-body">
         <h1 className="main-title">
-          <Link to="/">Everybody Eats</Link>
+          <Link to="/home">Everybody Eats</Link>
         </h1>
         <Route
         exact
@@ -172,7 +174,7 @@ handleLogout() {
       />
         <Route
         exact
-        path="events/:user_id/new"
+        path="/events/"
         render={() => (
             <EventForm
               eventData={this.state.eventData}
@@ -180,6 +182,11 @@ handleLogout() {
               onSubmit={this.handleSubmit}
             />
           )}
+        />
+        <Route
+          exact
+          path="/events/:id/"
+          render={() => <EventPage userData={this.state.userData} />}
         />
         <Route
         exact

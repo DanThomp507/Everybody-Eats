@@ -19,8 +19,8 @@ const loginUser = async user => {
   console.log("this is login user: resp", respData);
   return respData.data;
 };
-const createNewEvent = async (ev, user_id) => {
-  const respData = await api.post(`${BASE_URL}/events/${user_id}/new`, ev);
+const createNewEvent = async (ev) => {
+  const respData = await api.post(`${BASE_URL}/events/`, ev);
   console.log("this is create event: resp", respData);
   return respData.data;
 };
@@ -33,11 +33,17 @@ const fetchEventData = async ev => {
   const respData = await api.get(`/events/${ev}`);
   return respData.data;
 };
+const fetchEventUsers = async (user_id, event_id) => {
+  const respData = await api.get(`/${user_id}/events/${event_id}/`);
+  return respData.data;
+};
 
 export {
   createNewUser,
   editUser,
   loginUser,
   createNewEvent,
-  fetchAllEvents
+  fetchAllEvents,
+  fetchEventData,
+  fetchEventUsers,
 }
