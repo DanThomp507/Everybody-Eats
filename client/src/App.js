@@ -208,7 +208,7 @@ async userEvents() {
         <Route
           exact
           path="/events/:id/"
-          render={() => <EventPage userData={this.state.userData} />}
+          render={() => <EventPage userData={this.state.currentUser} />}
         />
         <Route
         exact
