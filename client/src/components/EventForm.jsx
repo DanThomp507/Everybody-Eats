@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { createNewEvent } from '../services/users.js'
+import { createNewEvent } from '../services/events'
 import { withRouter, Link } from "react-router-dom";
 
 class EventForm extends Component {
