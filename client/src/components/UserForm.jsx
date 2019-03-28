@@ -17,11 +17,11 @@ export default props => {
     toggleLocal,
     passwordAsk,
     title,
-    userData
+    currentUser
   } = props;
 
-  const showRegister = !show && !toggle;
-  console.log("register user form props", userData);
+  const showRegister = !toggle;
+  console.log("register user form props", currentUser);
   return (
     showRegister && (
       <div className="user-form-container">
