@@ -15,6 +15,14 @@ const UserProfile = props => {
             )
           }>Edit User
       </button>
+      <button
+        className="edit-button"
+        onClick={() =>
+          props.history.push(
+            `/events/${props.match.params.id}/new/`
+            )
+          }>Create Event
+      </button>
       <h2>Attending:</h2>
       <EventsList
         eventsList={props.eventsList}
@@ -22,7 +30,7 @@ const UserProfile = props => {
       <h2>Hosting:</h2>
       <EventsList
         eventsList={props.eventsList.filter((event) => {
-    
+
           return props.match.params.user_id == event.host_id
         } )}
       />

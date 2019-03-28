@@ -18,5 +18,11 @@ class EventPage extends Component {
     const eventData = await fetchEvent(this.props.match.params.id);
     const eventUsers = await fetchEventUsers(this.props.match.params.id);
   }
+  render() {
+    return(
+      <>
+      </>
+    )
+  }
 }
 export default EventPage

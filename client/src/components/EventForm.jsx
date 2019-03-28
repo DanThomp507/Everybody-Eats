@@ -10,7 +10,7 @@ class EventForm extends Component {
         event_name: '',
         event_location: '',
         event_date: '',
-        event_details: '',
+        event_details: ''
       }
     };
     this.handleEventFormChange = this.handleEventFormChange.bind(this);
@@ -28,7 +28,7 @@ handleEventFormChange(e) {
 }
 async handleSubmit(e){
   e.preventDefault();
-  const resp = await createNewEvent(this.props.match.params.id, this.state.eventData);
+  const resp = await createNewEvent(this.state.eventData);
   console.log(resp);
   this.setState(prevState => ({
     eventData: {
@@ -53,7 +53,7 @@ async componentDidMount() {
         <input
           type="text"
           placeholder="Name"
-          name="name"
+          name="event_name"
           value={this.event_name}
           id="event_name"
           onChange={this.handleEventFormChange}
@@ -61,7 +61,7 @@ async componentDidMount() {
         <label htmlFor="location">Event Location</label>
         <input
           type="text"
-          name="location"
+          name="event_location"
           placeholder="Location"
           value={this.props.event_location}
           id="location"

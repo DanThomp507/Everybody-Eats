@@ -1,8 +1,8 @@
 const { api } = require('./api_helper');
 const BASE_URL = "http://localhost:9000";
 
-const createNewEvent = async (ev, user_id) => {
-  const respData = await api.post(`/events/${user_id}/new`, ev);
+const createNewEvent = async (ev) => {
+  const respData = await api.post(`/events`, ev);
   console.log("this is create event: resp", respData);
   return respData.data;
 };

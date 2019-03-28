@@ -5,15 +5,15 @@ const { restrict } = require('../auth');
 const eventsRouter = Router();
 
 // create event
-eventsRouter.post('/', async (req, res, next) => {
+eventsRouter.post('/', restrict, async (req, res, next) => {
   try {
-    const { user_id, event_name, event_location, event_date, event_details } = req.body;
+    const { event_name, event_location, event_date, event_details } = req.body;
     const newEvent = await Event.create({
       event_name,
       event_location,
       event_date,
       event_details,
-      host_id: user_id
+      host_id: res.locals.user.id
     })
     res.json(newEvent)
   } catch(e) {
