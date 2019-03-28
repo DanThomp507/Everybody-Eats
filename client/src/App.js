@@ -188,7 +188,6 @@ async userEvents() {
               currentUser={this.state.currentUser}
               eventsList={this.state.eventsList}
             />
-          </>
         )}
       />
         <Route

@@ -5,8 +5,8 @@ import EventsList from "./EventsList";
 const UserProfile = props => {
   return (
     <div className="user-container">
-      <h2>{props.userData.username}</h2>
-      <p>Email: {props.userData.email}</p>
+      <h2>{props.currentUser.username}</h2>
+      <p>Email: {props.currentUser.email}</p>
       <button
         className="edit-button"
         onClick={() =>
