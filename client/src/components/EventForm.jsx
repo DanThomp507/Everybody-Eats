@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { createNewEvent } from '../services/events'
+import { joinEvent } from '../services/users'
 import { withRouter, Link } from "react-router-dom";
 
 class EventForm extends Component {
@@ -29,6 +30,8 @@ handleEventFormChange(e) {
 async handleSubmit(e){
   e.preventDefault();
   const resp = await createNewEvent(this.state.eventData);
+  debugger
+  await joinEvent(this.props.match.params.user_id, resp.id);
   console.log(resp);
   this.setState(prevState => ({
     eventData: {

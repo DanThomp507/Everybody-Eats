@@ -11,7 +11,7 @@ const UserProfile = props => {
         className="edit-button"
         onClick={() =>
           props.history.push(
-            `/user/${props.match.params.id}/edit/`
+            `/user/${props.match.params.user_id}/edit/`
             )
           }>Edit User
       </button>
@@ -19,7 +19,7 @@ const UserProfile = props => {
         className="edit-button"
         onClick={() =>
           props.history.push(
-            `/events/${props.match.params.id}/new/`
+            `/events/${props.match.params.user_id}/new/`
             )
           }>Create Event
       </button>
