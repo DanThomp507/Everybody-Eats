@@ -13,7 +13,8 @@ import {
   createNewUser,
   editUser,
   loginUser,
-  fetchUserEvents
+  fetchUserEvents,
+  verifyToken,
 } from "./services/users";
 import {
   createNewEvent,
@@ -52,6 +53,14 @@ class App extends Component {
   this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
   this.userEvents = this.userEvents.bind(this);
 }
+
+  async componentDidMount() {
+    const currentUser = await verifyToken();
+    this.setState({
+      currentUser
+    })
+
+  }
 
   async handleLogin(e) {
   e.preventDefault();
