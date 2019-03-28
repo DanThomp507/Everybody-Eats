@@ -4,6 +4,7 @@ import { Link, Route, withRouter } from "react-router-dom";
 import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
 import EventForm from './components/EventForm';
+import EventPage from './components/EventPage';
 import LogoutForm from './components/LogoutForm';
 import UserProfile from './components/UserProfile';
 import Footer from './components/Footer';
@@ -14,6 +15,7 @@ import {
   loginUser,
   createNewEvent,
   fetchAllEvents,
+  fetchEventUsers,
   fetchUserEvents
 } from "./services/users";
 
@@ -139,7 +141,7 @@ async userEvents() {
     return (
       <div className="Main-app-body">
         <h1 className="main-title">
-          <Link to="/">Everybody Eats</Link>
+          <Link to="/home">Everybody Eats</Link>
         </h1>
         <Route
           exact
@@ -203,12 +205,17 @@ async userEvents() {
         />
         <Route
           exact
-          path="/logout"
-          render={props => (
-            <LogoutForm {...props} handleLogout={this.handleLogout} />
-          )}
+          path="/events/:id/"
+          render={() => <EventPage userData={this.state.userData} />}
         />
-        <Footer
+        <Route
+        exact
+        path="/logout"
+        render={props => (
+          <LogoutForm {...props} handleLogout={this.handleLogout} />
+        )}
+      />
+      <Footer
           handleLogout={this.handleLogout}
           show={this.state.currentUser}
           currentUser={this.state.currentUser}

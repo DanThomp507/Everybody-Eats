@@ -1,16 +1,22 @@
 import React, { Component } from "react";
 import { Route, Link, withRouter } from "react-router-dom";
 import {
-  fetchAllEvents
+  fetchEventData,
+  fetchEventUsers
 } from "../services/users";
 
-class StationPage extends Component {
+
+class EventPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventData: ""
+      eventData: "",
+      eventUsers: []
     };
   }
   async getEventData() {
     const eventData = await fetchEventData(this.props.match.params.id);
+    const eventUsers = await fetchEventUsers(this.props.match.params.id);
+  }
 }
+export default EventPage

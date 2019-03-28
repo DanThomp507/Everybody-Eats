@@ -6,11 +6,11 @@ class EventForm extends Component {
   constructor() {
     super();
     this.state = {
-      eventData: {
+        eventData: {
         event_name: '',
         event_location: '',
         event_date: '',
-        event_details: ''
+        event_details: '',
       }
     };
     this.handleEventFormChange = this.handleEventFormChange.bind(this);
@@ -40,7 +40,8 @@ async handleSubmit(e){
 async componentDidMount() {
   this.setState(prevState => ({
     eventData: {
-      ...prevState.eventData
+      ...prevState.eventData,
+      host_id: this.props.match.params.id
     }
   }));
 }
@@ -62,7 +63,7 @@ async componentDidMount() {
           type="text"
           name="location"
           placeholder="Location"
-          value={this.event_location}
+          value={this.props.event_location}
           id="location"
           onChange={this.handleEventFormChange}
         />
