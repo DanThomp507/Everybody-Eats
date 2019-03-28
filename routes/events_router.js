@@ -76,6 +76,7 @@ eventsRouter.post('/', restrict, async (req, res, next) => {
     next(e);
   }
 });
+
 // find event guests
 eventsRouter.get('/guests/:event_id', async (req, res, next) => {
   try {

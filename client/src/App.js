@@ -208,12 +208,13 @@ async userEvents(id) {
               eventData={this.state.eventData}
               onChange={this.handleEventFormChange}
               onSubmit={this.handleSubmit}
+              currentUser={this.state.currentUser}
             />
           )}
         />
         <Route
           exact
-          path="/events/:id/"
+          path="/events/:event_id"
           render={() => <EventPage userData={this.state.currentUser} />}
         />
         <Route

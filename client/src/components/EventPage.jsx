@@ -14,15 +14,20 @@ class EventPage extends Component {
       eventUsers: []
     };
   }
-  async getEventData() {
-    const eventData = await fetchEvent(this.props.match.params.id);
-    const eventUsers = await fetchEventUsers(this.props.match.params.id);
+  async componentDidMount() {
+    const eventData = await fetchEvent(this.props.match.params.event_id);
+    const eventUsers = await fetchEventUsers(this.props.match.params.event_id);
+    this.setState({
+      eventData,
+      eventUsers
+    })
   }
   render() {
     return(
       <>
+      {this.state.eventData.event_name}
       </>
     )
   }
 }
-export default EventPage
+export default withRouter(EventPage)
