@@ -30,9 +30,7 @@ handleEventFormChange(e) {
 async handleSubmit(e){
   e.preventDefault();
   const resp = await createNewEvent(this.state.eventData);
-  debugger
   await joinEvent(this.props.match.params.user_id, resp.id);
-  console.log(resp);
   this.setState(prevState => ({
     eventData: {
       ...prevState.eventData
