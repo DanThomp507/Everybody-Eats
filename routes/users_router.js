@@ -46,16 +46,19 @@ usersRouter.post("/register", async (req, res, next) => {
 usersRouter.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
+    console.log(email);
     const user = await User.findOne({
       where: {
         email
       }
     });
-    const isPassValid = await compare(password, user.dataValues.password_digest);
-    if (isPassValid) {
-      delete user.dataValues.password_digest
-      const respData = await buildAuthResponse(user.dataValues);
-      res.json(respData);
+    if (user) {
+      const isPassValid = await compare(password, user.dataValues.password_digest);
+      if (isPassValid) {
+        delete user.dataValues.password_digest
+        const respData = await buildAuthResponse(user.dataValues);
+        res.json(respData);
+      }
     } else {
       res.status(401).send("Invalid credentials");
     }

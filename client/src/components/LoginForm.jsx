@@ -2,7 +2,7 @@ import React from "react";
 
 export default props => {
   const { toggle, show, email, password, onChange, onSubmit, onClick } = props;
-  const showLogin = !show && toggle;
+  const showLogin = toggle;
   return (
     showLogin && (
       <div className="user-form-container">

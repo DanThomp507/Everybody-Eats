@@ -7,6 +7,7 @@ import EventForm from './components/EventForm';
 import LogoutForm from './components/LogoutForm';
 import UserProfile from './components/UserProfile';
 import Footer from './components/Footer';
+
 import {
   createNewUser,
   editUser,
@@ -32,11 +33,10 @@ class App extends Component {
       email: "",
       password: ""
     },
-    currentUser: null,
     toggleLogin: true,
-    token: "",
-    eventData: {},
-    eventsList: []
+    currentUser: {},
+    currentEvent: {},
+    eventsList: [],
   }
   this.handleLogin = this.handleLogin.bind(this);
   this.handleLoginClick = this.handleLoginClick.bind(this);
@@ -53,8 +53,6 @@ class App extends Component {
   const currentUser = await loginUser(this.state.loginFormData);
   console.log("userdata from handleLogin", currentUser);
   this.setState({
-    currentUser: currentUser.user.username,
-    token: currentUser.token,
     loginFormData: {
       email: "",
       password: ""
@@ -83,6 +81,7 @@ handleToggleLocalRegister(e) {
     }
   }));
 }
+
 handleLoginFormChange(e) {
   const { name, value } = e.target;
   this.setState(prevState => ({
@@ -107,9 +106,7 @@ async handleRegister(e) {
   const currentUser = await createNewUser(this.state.registerFormData);
   console.log(currentUser);
   this.setState((prevState, newState) => ({
-    currentUser: currentUser.user.username,
     currentUser: currentUser.user,
-    token: currentUser.token,
     registerFormData: {
       username: "",
       first_name: "",
@@ -119,14 +116,13 @@ async handleRegister(e) {
     }
   }));
   this.userEvents()
-  localStorage.setItem("jwt", currentUser.token);
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
 handleLogout() {
-  localStorage.removeItem("jwt");
+  localStorage.removeItem("authToken");
   this.setState({
-    currentUser: null,
+    currentUser: {},
     toggleLogin: true
   });
   this.props.history.push(`/`);
@@ -161,25 +157,25 @@ async userEvents() {
                 password={this.state.loginFormData.password}
                 onClick={this.handleLoginClick}
               />
-              <UserForm
-                {...props}
-                currentUser={""}
-                title={"Register User"}
-                onClick={this.handleLoginClick}
-                show={this.state.currentUser}
-                toggle={this.state.toggleLogin}
-                onChange={this.handleRegisterFormChange}
-                onSubmit={this.handleRegister}
-                first_name={this.state.registerFormData.first_name}
-                last_name={this.state.registerFormData.last_name}
-                username={this.state.registerFormData.username}
-                email={this.state.registerFormData.email}
-                password={this.state.registerFormData.password}
-                submitButtonText="Submit"
-                backButtonText="Back to Login"
-                passwordAsk={"y"}
-                toggleLocal={this.state.handleToggleLocalRegister}
-              />
+            <UserForm
+              {...props}
+              currentUser={this.state.currentUser}
+              title={"Register User"}
+              onClick={this.handleLoginClick}
+              show={this.state.currentUser}
+              toggle={this.state.toggleLogin}
+              onChange={this.handleRegisterFormChange}
+              onSubmit={this.handleRegister}
+              first_name={this.state.registerFormData.first_name}
+              last_name={this.state.registerFormData.last_name}
+              username={this.state.registerFormData.username}
+              email={this.state.registerFormData.email}
+              password={this.state.registerFormData.password}
+              submitButtonText="Submit"
+              backButtonText="Back to Login"
+              passwordAsk={"y"}
+              toggleLocal={this.state.handleToggleLocalRegister}
+            />
             </>
           )}
         />
@@ -192,6 +188,7 @@ async userEvents() {
               currentUser={this.state.currentUser}
               eventsList={this.state.eventsList}
             />
+          </>
         )}
       />
         <Route

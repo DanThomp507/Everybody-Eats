@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Footer = props => {
-  const { show, userData } = props;
+  const { show, currentUser } = props;
   return (
     <div className="footer">
       <div className="footer-text">
@@ -10,12 +10,16 @@ const Footer = props => {
           <>
             <Link to="/home">Home</Link>
 
-            <Link
-              to={"/user/" + userData.id + "/username/" + userData.username}
-            >
-              Profile
-            </Link>
-            <Link to="/logout">Logout</Link>
+            {currentUser &&
+              <>
+                <Link
+                to={"/user/" + currentUser.id + "/username/" + currentUser.username}
+                >
+                Profile
+                </Link>
+                <Link to="/logout">Logout</Link>
+              </>
+            }
           </>
         )}
         <a href="https://github.com/DanThomp507/Everybody-Eats">github</a>
