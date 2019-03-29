@@ -2,31 +2,34 @@ import React, { Component } from "react";
 import { Route, Link, withRouter } from "react-router-dom";
 import {
   fetchEvent,
-  fetchEventUsers
+  fetchEventUsers,
 } from "../services/events";
-
+import EventsList from './EventsList';
 
 class EventPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventData: {},
-      eventUsers: []
+      eventData: {}
     };
   }
-  async getEventData() {
-    const eventData = await fetchEvent(this.props.match.params.id);
-    const eventUsers = await fetchEventUsers(this.props.match.params.id);
-  }
   async componentDidMount() {
-    await this.getEventData();
-  }
-  render() {
-    return(
-      <>
-      <h1>{this.state.eventData.event_name}</h1>
-      </>
-    )
-  }
-}
-export default EventPage
+	    const eventData = await fetchEvent(this.props.match.params.event_id);
+	    this.setState({
+	      eventData
+	    })
+	  }
+	  render() {
+	    return(
+	      <>
+	      <h1>{this.state.eventData.event_name}</h1>
+         <h2>{this.state.eventData.event_location}</h2>
+          <h2>{this.state.eventData.event_date}</h2>
+           <h2>{this.state.eventData.event_details}</h2>
+
+           <h3>Confirmed Guests:</h3>
+	      </>
+	    )
+	  }
+	}
+export default withRouter(EventPage)

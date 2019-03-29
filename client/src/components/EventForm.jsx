@@ -87,9 +87,14 @@ async componentDidMount() {
           id="event_details"
           onChange={this.handleEventFormChange}
         />
-        <button type="submit" onClick={this.handleSubmit}>
+      <button type="submit" onClick={(e) => {
+          this.props.history.push(
+            `/user/${this.props.currentUser.id}/username/${this.props.currentUser.username}`
+          )
+          this.handleSubmit(e)
+      }}>
         Submit
-        </button>
+      </button>
       </form>
     );
   }

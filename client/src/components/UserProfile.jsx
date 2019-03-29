@@ -23,17 +23,22 @@ const UserProfile = props => {
             )
           }>Create Event
       </button>
-      <h2>Attending:</h2>
-      <EventsList
-        eventsList={props.eventsList}
-      />
-      <h2>Hosting:</h2>
-      <EventsList
-        eventsList={props.eventsList.filter((event) => {
-
-          return props.match.params.user_id == event.host_id
-        } )}
-      />
+      <div className="eventsList-container">
+        <div>
+          <h2>Attending:</h2>
+          <EventsList
+            eventsList={props.eventsList}
+          />
+        </div>
+        <div>
+          <h2>Hosting:</h2>
+          <EventsList
+            eventsList={props.eventsList.filter((event) => {
+              return props.match.params.user_id == event.host_id
+            } )}
+          />
+        </div>
+      </div>
     </div>
   );
 }
