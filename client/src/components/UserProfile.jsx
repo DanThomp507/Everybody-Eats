@@ -11,21 +11,34 @@ const UserProfile = props => {
         className="edit-button"
         onClick={() =>
           props.history.push(
-            `/user/${props.match.params.id}/edit/`
+            `/user/${props.match.params.user_id}/edit/`
             )
           }>Edit User
       </button>
-      <h2>Attending:</h2>
-      <EventsList
-        eventsList={props.eventsList}
-      />
-      <h2>Hosting:</h2>
-      <EventsList
-        eventsList={props.eventsList.filter((event) => {
-    
-          return props.match.params.user_id == event.host_id
-        } )}
-      />
+      <button
+        className="edit-button"
+        onClick={() =>
+          props.history.push(
+            `/events/${props.match.params.user_id}/new/`
+            )
+          }>Create Event
+      </button>
+      <div className="eventsList-container">
+        <div>
+          <h2>Attending:</h2>
+          <EventsList
+            eventsList={props.eventsList}
+          />
+        </div>
+        <div>
+          <h2>Hosting:</h2>
+          <EventsList
+            eventsList={props.eventsList.filter((event) => {
+              return props.match.params.user_id == event.host_id
+            } )}
+          />
+        </div>
+      </div>
     </div>
   );
 }

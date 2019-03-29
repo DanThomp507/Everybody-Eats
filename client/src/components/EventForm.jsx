@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { createNewEvent } from '../services/events'
+import { joinEvent } from '../services/users'
 import { withRouter, Link } from "react-router-dom";
 
 class EventForm extends Component {
   constructor() {
     super();
     this.state = {
-      eventData: {
+        eventData: {
         event_name: '',
         event_location: '',
         event_date: '',
@@ -28,8 +29,8 @@ handleEventFormChange(e) {
 }
 async handleSubmit(e){
   e.preventDefault();
-  const resp = await createNewEvent(this.props.match.params.id, this.state.eventData);
-  console.log(resp);
+  const resp = await createNewEvent(this.state.eventData);
+  await joinEvent(this.props.match.params.user_id, resp.id);
   this.setState(prevState => ({
     eventData: {
       ...prevState.eventData
@@ -40,7 +41,8 @@ async handleSubmit(e){
 async componentDidMount() {
   this.setState(prevState => ({
     eventData: {
-      ...prevState.eventData
+      ...prevState.eventData,
+      host_id: this.props.match.params.id
     }
   }));
 }
@@ -52,7 +54,7 @@ async componentDidMount() {
         <input
           type="text"
           placeholder="Name"
-          name="name"
+          name="event_name"
           value={this.event_name}
           id="event_name"
           onChange={this.handleEventFormChange}
@@ -60,9 +62,9 @@ async componentDidMount() {
         <label htmlFor="location">Event Location</label>
         <input
           type="text"
-          name="location"
+          name="event_location"
           placeholder="Location"
-          value={this.event_location}
+          value={this.props.event_location}
           id="location"
           onChange={this.handleEventFormChange}
         />
@@ -85,9 +87,14 @@ async componentDidMount() {
           id="event_details"
           onChange={this.handleEventFormChange}
         />
-        <button type="submit" onClick={this.handleSubmit}>
+      <button type="submit" onClick={(e) => {
+          this.props.history.push(
+            `/user/${this.props.currentUser.id}/username/${this.props.currentUser.username}`
+          )
+          this.handleSubmit(e)
+      }}>
         Submit
-        </button>
+      </button>
       </form>
     );
   }

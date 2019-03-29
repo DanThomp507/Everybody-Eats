@@ -4,6 +4,7 @@ import { Link, Route, withRouter } from "react-router-dom";
 import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
 import EventForm from './components/EventForm';
+import EventPage from './components/EventPage';
 import LogoutForm from './components/LogoutForm';
 import UserProfile from './components/UserProfile';
 import Footer from './components/Footer';
@@ -12,10 +13,15 @@ import {
   createNewUser,
   editUser,
   loginUser,
+  fetchUserEvents,
+  verifyToken,
+} from "./services/users";
+import {
   createNewEvent,
   fetchAllEvents,
-  fetchUserEvents
-} from "./services/users";
+  fetchEvent,
+  fetchEventUsers
+} from "./services/events";
 
 class App extends Component {
   constructor(props) {
@@ -36,6 +42,7 @@ class App extends Component {
     toggleLogin: true,
     currentUser: {},
     currentEvent: {},
+    eventData: {},
     eventsList: [],
   }
   this.handleLogin = this.handleLogin.bind(this);
@@ -48,6 +55,15 @@ class App extends Component {
   this.userEvents = this.userEvents.bind(this);
 }
 
+  async componentDidMount() {
+    const currentUser = await verifyToken();
+    const eventsList =  await this.userEvents(currentUser.id)
+    this.setState({
+      currentUser,
+      eventsList
+    })
+  }
+
   async handleLogin(e) {
   e.preventDefault();
   const currentUser = await loginUser(this.state.loginFormData);
@@ -59,7 +75,6 @@ class App extends Component {
     },
     currentUser: currentUser.user
   });
-  this.userEvents()
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
@@ -115,7 +130,6 @@ async handleRegister(e) {
       password: ""
     }
   }));
-  this.userEvents()
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
@@ -128,18 +142,16 @@ handleLogout() {
   this.props.history.push(`/`);
 }
 
-async userEvents() {
-  const eventsList = await fetchUserEvents(this.state.currentUser.id);
-  this.setState({
-    eventsList,
-  });
+async userEvents(id) {
+  const eventsList = await fetchUserEvents(id);
+  return eventsList
 }
 
   render() {
     return (
       <div className="Main-app-body">
         <h1 className="main-title">
-          <Link to="/">Everybody Eats</Link>
+          <Link to="/home">Everybody Eats</Link>
         </h1>
         <Route
           exact
@@ -158,7 +170,6 @@ async userEvents() {
               />
             <UserForm
               {...props}
-              currentUser={this.state.currentUser}
               title={"Register User"}
               onClick={this.handleLoginClick}
               show={this.state.currentUser}
@@ -198,17 +209,27 @@ async userEvents() {
               eventData={this.state.eventData}
               onChange={this.handleEventFormChange}
               onSubmit={this.handleSubmit}
+              currentUser={this.state.currentUser}
             />
           )}
         />
         <Route
           exact
-          path="/logout"
-          render={props => (
-            <LogoutForm {...props} handleLogout={this.handleLogout} />
-          )}
+          path="/events/:event_id"
+          render={() => (
+            <EventPage
+              userData={this.state.currentUser}
+              />
+            )}
         />
-        <Footer
+        <Route
+        exact
+        path="/logout"
+        render={props => (
+          <LogoutForm {...props} handleLogout={this.handleLogout} />
+        )}
+      />
+      <Footer
           handleLogout={this.handleLogout}
           show={this.state.currentUser}
           currentUser={this.state.currentUser}

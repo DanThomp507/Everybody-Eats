@@ -13,8 +13,7 @@ const EventsList = props => {
             <div className="event-buttons-container">
               <button
                 className="event-button"
-                onClick={() =>
-                  props.history.push(`/events/${event.id}`)}
+                onClick={() => props.history.push(`/events/${event.id}`)}
               >
                 View Event
               </button>
