@@ -146,5 +146,5 @@ async componentDidMount() {
   }
 }
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyBk0lGswqj4lKV2Rsr7g0CRA4UlMaIT8bQ',
+  apiKey: process.env.REACT_APP_API_KEY,
 })(withRouter(EventForm));
