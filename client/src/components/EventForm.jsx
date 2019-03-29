@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { createNewEvent } from '../services/events'
 import { joinEvent } from '../services/users'
 import { withRouter, Link } from "react-router-dom";
+import PlacesAutocomplete from 'react-places-autocomplete';
+import {GoogleApiWrapper} from "google-maps-react";
 
 class EventForm extends Component {
   constructor() {
@@ -12,7 +14,7 @@ class EventForm extends Component {
         event_location: '',
         event_date: '',
         event_details: ''
-      }
+      },
     };
     this.handleEventFormChange = this.handleEventFormChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,6 +40,24 @@ async handleSubmit(e){
   }))
 }
 
+handleChange = (address) => {
+  this.setState(prevState => ({
+    eventData: {
+      ...prevState.eventData,
+      event_location: address
+    }
+  }));
+};
+
+handleSelect = (address) => {
+  this.setState(prevState => ({
+    eventData: {
+      ...prevState.eventData,
+      event_location: address
+    }
+  }));
+};
+
 async componentDidMount() {
   this.setState(prevState => ({
     eventData: {
@@ -60,14 +80,40 @@ async componentDidMount() {
           onChange={this.handleEventFormChange}
         />
         <label htmlFor="location">Event Location</label>
-        <input
-          type="text"
-          name="event_location"
-          placeholder="Location"
-          value={this.props.event_location}
-          id="location"
-          onChange={this.handleEventFormChange}
-        />
+          <PlacesAutocomplete
+            value={this.state.eventData.event_location}
+            onChange={this.handleChange}
+            onSelect={this.handleSelect}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+              <div className='input-and-auto'>
+                <input
+                  {...getInputProps({
+                    name: "event_location",
+                    placeholder: 'Where to?',
+                    className: 'location-search-input',
+                  })}
+                />
+                <div className="autocomplete-dropdown-container">
+                  {loading && <div>Loading...</div>}
+                  {suggestions.map(suggestion => {
+                    const className=suggestion.active
+                      ? 'suggestion-item--active'
+                      : 'suggestion-item';
+                    return (
+                      <div
+                        {...getSuggestionItemProps(suggestion, {
+                          className,
+                        })}
+                      >
+                        <span>{suggestion.description}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </PlacesAutocomplete>
         <label htmlFor="event_date">
           Event Date
         </label>
@@ -99,5 +145,6 @@ async componentDidMount() {
     );
   }
 }
-
-export default withRouter(EventForm);
+export default GoogleApiWrapper({
+  apiKey: 'AIzaSyBk0lGswqj4lKV2Rsr7g0CRA4UlMaIT8bQ',
+})(withRouter(EventForm));
