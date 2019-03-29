@@ -67,13 +67,15 @@ class App extends Component {
   async handleLogin(e) {
   e.preventDefault();
   const currentUser = await loginUser(this.state.loginFormData);
-  console.log("userdata from handleLogin", currentUser);
+  console.log(currentUser);
+  const eventsList =  await this.userEvents(currentUser.user.id)
   this.setState({
     loginFormData: {
       email: "",
       password: ""
     },
-    currentUser: currentUser.user
+    eventsList,
+    currentUser: currentUser.user,
   });
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
@@ -120,8 +122,10 @@ async handleRegister(e) {
   e.preventDefault();
   const currentUser = await createNewUser(this.state.registerFormData);
   console.log(currentUser);
+  const eventsList =  await this.userEvents(currentUser.user.id)
   this.setState((prevState, newState) => ({
     currentUser: currentUser.user,
+    eventsList,
     registerFormData: {
       username: "",
       first_name: "",

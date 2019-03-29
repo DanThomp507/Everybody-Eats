@@ -78,7 +78,7 @@ eventsRouter.post('/', restrict, async (req, res, next) => {
 });
 
 // find event guests
-eventsRouter.get('/guests/:event_id', async (req, res, next) => {
+eventsRouter.get('/:event_id/guests', async (req, res, next) => {
   try {
     const event = await Event.findByPk(req.params.event_id);
     const guests = await event.getUsers();
