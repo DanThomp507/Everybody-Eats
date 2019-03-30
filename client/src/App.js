@@ -61,6 +61,7 @@ class App extends Component {
   this.handleRegister = this.handleRegister.bind(this);
   this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
   this.userEvents = this.userEvents.bind(this);
+  this.updateUserEvents = this.updateUserEvents.bind(this);
 }
 
   async componentDidMount() {
@@ -180,6 +181,15 @@ handleLogout() {
   this.props.history.push(`/`);
 }
 
+async updateUserEvents() {
+  const eventsList = await this.userEvents(this.state.currentUser.id)
+  debugger
+  this.setState({
+    eventsList: eventsList
+  });
+}
+
+
 async userEvents(id) {
   const eventsList = await fetchUserEvents(id);
   return eventsList
@@ -248,6 +258,7 @@ async userEvents(id) {
               onChange={this.handleEventFormChange}
               onSubmit={this.handleSubmit}
               currentUser={this.state.currentUser}
+              updateUserEvents={this.updateUserEvents}
             />
           )}
         />

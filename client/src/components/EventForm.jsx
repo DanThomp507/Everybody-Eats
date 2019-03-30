@@ -33,6 +33,7 @@ async handleSubmit(e){
   e.preventDefault();
   const resp = await createNewEvent(this.state.eventData);
   await joinEvent(this.props.match.params.user_id, resp.id);
+  this.props.updateUserEvents()
   this.setState(prevState => ({
     eventData: {
       ...prevState.eventData
@@ -68,7 +69,7 @@ async componentDidMount() {
 }
   render() {
     return (
-      <form className="event-form" onSubmit={this.handleSubmit}>
+      <form className="event-form">
         <h2>Create an Event</h2>
         <label htmlFor="name">Event Name</label>
         <input
@@ -134,10 +135,10 @@ async componentDidMount() {
           onChange={this.handleEventFormChange}
         />
       <button type="submit" onClick={(e) => {
-          this.props.history.push(
-            `/user/${this.props.currentUser.id}/username/${this.props.currentUser.username}`
-          )
-          this.handleSubmit(e)
+        this.handleSubmit(e)
+        this.props.history.push(
+          `/user/${this.props.currentUser.id}/username/${this.props.currentUser.username}`
+        )
       }}>
         Submit
       </button>
