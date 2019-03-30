@@ -28,7 +28,9 @@ const UserProfile = props => {
           <h2>Attending:</h2>
           <EventsList
             host={false}
-            eventsList={props.eventsList}
+            eventsList={props.eventsList.filter((event) => {
+              return props.match.params.user_id != event.host_id
+            } )}
           />
         </div>
         <div>
