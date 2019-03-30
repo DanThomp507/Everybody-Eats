@@ -27,12 +27,14 @@ const UserProfile = props => {
         <div>
           <h2>Attending:</h2>
           <EventsList
+            host={false}
             eventsList={props.eventsList}
           />
         </div>
         <div>
           <h2>Hosting:</h2>
           <EventsList
+            host={true}
             eventsList={props.eventsList.filter((event) => {
               return props.match.params.user_id == event.host_id
             } )}
