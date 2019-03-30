@@ -23,7 +23,7 @@ export default props => {
   return (
     showRegister && (
       <div className="user-form-container">
-      <h1>Register</h1>
+      <h1>{title}</h1>
       <form>
         <input
           onChange={onChange}
