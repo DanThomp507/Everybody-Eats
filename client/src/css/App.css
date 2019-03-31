@@ -1,11 +1,16 @@
-body,
 html {
-  background-color: #e4d1c4;
-  background-image: url('./img/background1.png');
-  background-position: center;
-  background-size: contain;
   height: 100%;
   width: 100%;
+  background-color: #e4d1c4;
+  background-image: url('./img/background2.png');
+  background-position: center;
+  background-size: contain;
+}
+
+.main-app-body {
+  margin: 0;
+  padding: 0;
+  font-family: 'helvetica';
 }
 
 /* login page and title. Also the main page. (for now) */
@@ -26,7 +31,7 @@ html {
   border: 2px solid #55495b;
   border-radius: 1em;
   width: 30vw;
-  margin: 5% auto;
+  margin: 13vh auto;
   height: 65vh;
   list-style-type: none;
   font-size: 1.8em;
@@ -35,7 +40,12 @@ html {
 
 .user-form-container h1 {
   transform: rotate(-10deg);
-  font-size: 3em;
+  font-size: 4em;
+  color: #b8837c;
+  font-family: 'Tangerine', cursive;
+}
+
+.user-form-container h2 {
   color: #b8837c;
 }
 
@@ -48,6 +58,55 @@ html {
   overflow: hidden;
 }
 
+
+
+/* Sidebar Nav */
+.sidebar-nav {
+  background-color: #55495b;
+  border: .03em solid;
+  border-radius: 20px;
+  width: 100vw;
+  margin-left: -13%;
+  width: 12vw;
+  height: 300px;
+}
+
+.sidebar-nav ul {
+  list-style-type: none;
+  padding-left: 0;
+  text-align: center;
+}
+
+.sidebar-nav button {
+  font-size: 1.4em;
+  font-weight: 300;
+  margin-bottom: 1vh;
+  color: #fff;
+  background-color: Transparent;
+  border: none;
+  cursor:pointer;
+  width: 8vw;
+  height: 10vh;
+}
+
+#edit-user {
+  /* border: 1px solid red; */
+  /* width: auto; */
+  /* background-color: #55495b; */
+}
+
+#create-event {
+  margin-top: 3vh;
+  /* background-color: #55495b; */
+  /* border: 1px solid red; */
+}
+
+#test {
+  height: .03em;
+  margin-top: 20px;
+  background-color: #fff;
+
+}
 
 
 /* register button */
@@ -80,21 +139,20 @@ html {
 
 
 
-
-.nav {
-    /* position: fixed;
-    bottom: 0vh; */
-    margin: 0;
-    width: 15vw;
-    height: -7vh;
+  .footer {
+    position: fixed;
+    bottom: 0vh;
+    width: 100vw;
+    height: 7vh;
     display: flex;
-    justify-content: center;
-    background-color: purple;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgba(85, 73, 91, .8);
     z-index: 2;
   }
-  .nav a {
-    display: flex;
 
+  .footer a {
+    display: flex;
     text-decoration: none;
     text-align: center;
     color: white;
@@ -102,7 +160,11 @@ html {
     font-weight: bolder;
     font-size: 16px;
   }
+
+
 .eventsList-container {
   display: flex;
   justify-content: space-around;
+  height: 82.2vh;
+  /* border: 1px solid red; */
 }

@@ -6,6 +6,7 @@ import {
 } from "../services/events";
 import {joinEvent} from "../services/users";
 import AttendingUsers from "./AttendingUsers";
+import Moment from 'moment';
 
 class EventPage extends Component {
   constructor(props) {
@@ -23,12 +24,12 @@ class EventPage extends Component {
         guestList
 	    })
 	  }
-	  render() {
+ render() {
 	    return(
 	      <>
 	      <h1>{this.state.eventData.event_name}</h1>
         <h2>{this.state.eventData.event_location}</h2>
-        <h2>{this.state.eventData.event_date}</h2>
+        <h2>{Moment(this.state.eventData.event_date).format("LLL")}</h2>
         <h2>{this.state.eventData.event_details}</h2>
         <button onClick={async (e) => {
             e.preventDefault()

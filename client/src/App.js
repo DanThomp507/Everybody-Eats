@@ -51,6 +51,7 @@ class App extends Component {
     currentEvent: {},
     eventData: {},
     eventsList: [],
+    show: false
   }
   this.handleLogin = this.handleLogin.bind(this);
   this.handleLoginClick = this.handleLoginClick.bind(this);
@@ -92,6 +93,7 @@ class App extends Component {
     },
     eventsList,
     currentUser: currentUser.user,
+    show: true,
   });
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
@@ -152,14 +154,14 @@ async handleRegister(e) {
       last_name: "",
       email: "",
       password: ""
-    }
+    },
+    show: true
   }));
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
 async handleEditUser(e) {
   e.preventDefault()
-
   const currentUser = await editUser(this.state.currentUser.id, this.state.editFormData)
   const eventsList =  await this.userEvents(this.state.currentUser.id)
   console.log(currentUser);
@@ -176,7 +178,8 @@ handleLogout() {
   localStorage.removeItem("authToken");
   this.setState({
     currentUser: {},
-    toggleLogin: true
+    toggleLogin: true,
+    show: false
   });
   this.props.history.push(`/`);
 }
@@ -301,7 +304,7 @@ async userEvents(id) {
       />
       <Footer
           handleLogout={this.handleLogout}
-          show={this.state.currentUser}
+          show={this.state.show}
           currentUser={this.state.currentUser}
         />
       </div>
