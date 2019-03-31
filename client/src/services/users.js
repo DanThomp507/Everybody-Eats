@@ -47,6 +47,10 @@ const fetchUserEvents = async user => {
 const joinEvent = async (user_id, event_id) => {
   await api.post(`/events/${event_id}/user/${user_id}/add`);
 };
+const backoutEvent = async (user_id, event_id) => {
+  await api.delete(`/events/${event_id}/user/${user_id}/delete`);
+};
+
 
 export {
   createNewUser,
@@ -54,5 +58,6 @@ export {
   loginUser,
   fetchUserEvents,
   verifyToken,
-  joinEvent
+  joinEvent,
+  backoutEvent
 }
