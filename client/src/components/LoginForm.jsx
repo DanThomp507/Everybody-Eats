@@ -7,9 +7,7 @@ export default props => {
   return (
     showLogin && (
       <div className="user-form-container">
-        <h1 className="main-title">
-          <Link to="/home">Everybody <br/> Eats</Link>
-        </h1>
+        <h1 className="main-title">Everybody Eats</h1>
         <form>
           <h2>Login</h2>
           <div>

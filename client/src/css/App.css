@@ -1,6 +1,9 @@
 body,
 html {
-  background-color: #c8a69a;
+  background-color: #e4d1c4;
+  background-image: url('./img/background1.png');
+  background-position: center;
+  background-size: contain;
   height: 100%;
   width: 100%;
 }
@@ -24,15 +27,16 @@ html {
   border-radius: 1em;
   width: 30vw;
   margin: 5% auto;
-  height: 550px;
+  height: 65vh;
   list-style-type: none;
   font-size: 1.8em;
-  background-color: rgba(85, 73, 91, .7);
+  background-color: rgba(85, 73, 91, .8);
 }
 
 .user-form-container h1 {
   transform: rotate(-10deg);
-  font-size: 2.5em;
+  font-size: 3em;
+  color: #b8837c;
 }
 
 .login-button {
@@ -77,18 +81,20 @@ html {
 
 
 
-.footer {
-    position: fixed;
-    bottom: 0vh;
-    width: 100vw;
-    height: 7vh;
+.nav {
+    /* position: fixed;
+    bottom: 0vh; */
+    margin: 0;
+    width: 15vw;
+    height: -7vh;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: center;
     background-color: purple;
     z-index: 2;
   }
-  .footer a {
+  .nav a {
+    display: flex;
+
     text-decoration: none;
     text-align: center;
     color: white;

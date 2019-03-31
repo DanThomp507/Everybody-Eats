@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const Footer = props => {
   const { show, currentUser } = props;
   return (
-    <div className="footer">
-      <div className="footer-text">
+    <div className="nav">
+      <div className="nav-text">
         {show && (
           <>
             <Link to="/home">Home</Link>
