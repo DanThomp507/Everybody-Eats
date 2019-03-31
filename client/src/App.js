@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 import { Link, Route, withRouter } from "react-router-dom";
 import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
@@ -197,10 +197,7 @@ async userEvents(id) {
 
   render() {
     return (
-      <div className="Main-app-body">
-        <h1 className="main-title">
-          <Link to="/home">Everybody Eats</Link>
-        </h1>
+      <div className="main-app-body">
         <Route
           exact
           path="/"
