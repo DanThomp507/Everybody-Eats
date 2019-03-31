@@ -6,8 +6,8 @@ const EventNameField = props => {
     handleFieldSubmit,
   } = props
   return (
-    <div>
-      <label htmlFor="name">Event Name</label>
+    <div className="event-name">
+      <label htmlFor="name">Name</label>
       <input
         type="text"
         placeholder="Name"

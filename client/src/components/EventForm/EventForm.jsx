@@ -103,13 +103,13 @@ class EventForm extends Component {
     console.log(this.props);
     console.log(this.state);
     return (
-      <div>
+      <>
+      <h2 className="create-event-title">Create an Event</h2>
+      <div className="event-form-container">
         <EventNav
           handleEventFieldSelect={this.handleEventFieldSelect}
         />
         <form className="event-form" onSubmit={this.handleFieldSubmit}>
-          <h2>Create an Event</h2>
-
           {this.state.field === 1 &&
             <EventNameField
               event_name={this.state.eventData.event_name}
@@ -147,6 +147,7 @@ class EventForm extends Component {
           }
         </form>
       </div>
+      </>
     );
   }
 }

@@ -3,7 +3,7 @@ import React from 'react'
 const EventNav = props => {
   const { handleEventFieldSelect } = props
   return (
-    <div>
+    <div className="event-nav">
       <button value={1} onClick={e => handleEventFieldSelect(e)}>Name</button>
       <button value={2} onClick={e => handleEventFieldSelect(e)}>Location</button>
       <button value={3} onClick={e => handleEventFieldSelect(e)}>Where & When</button>
