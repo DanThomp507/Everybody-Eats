@@ -3,7 +3,7 @@ import './css/App.css';
 import { Link, Route, withRouter } from "react-router-dom";
 import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
-import EventForm from './components/EventForm';
+import EventForm from './components/EventForm/EventForm';
 import EventPage from './components/EventPage';
 import LogoutForm from './components/LogoutForm';
 import UserProfile from './components/UserProfile';
@@ -251,9 +251,6 @@ async userEvents(id) {
           path="/events/:user_id/new"
           render={() => (
             <EventForm
-              eventData={this.state.eventData}
-              onChange={this.handleEventFormChange}
-              onSubmit={this.handleSubmit}
               currentUser={this.state.currentUser}
               updateUserEvents={this.updateUserEvents}
             />
