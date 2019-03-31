@@ -5,12 +5,12 @@ import EventsList from "./EventsList";
 const UserProfile = props => {
   return (
     <div className="user-container">
-      <h2>{props.currentUser.username}</h2>
-      <p>Email: {props.currentUser.email}</p>
+      <div className='title-container'>
+        <h2>{props.currentUser.username}</h2>
+        <p>Email: {props.currentUser.email}</p>
+      </div>
       <div className="eventsList-container">
         <nav className='sidebar-nav'>
-          <ul>
-            <li>
               <button
                 className="edit-button"
                 id='edit-user'
@@ -20,9 +20,6 @@ const UserProfile = props => {
                     )
                   }>Edit User
               </button>
-            </li>
-            <li id='test'></li>
-            <li>
               <button
                 className="edit-button"
                 id='create-event'
@@ -32,10 +29,8 @@ const UserProfile = props => {
                     )
                   }>Create Event
               </button>
-            </li>
-          </ul>
         </nav>
-        <div>
+        <div className='attending-hosting'>
           <h2>Attending:</h2>
           <EventsList
             host={false}
@@ -44,7 +39,7 @@ const UserProfile = props => {
             } )}
           />
         </div>
-        <div>
+        <div className='attending-hosting'>
           <h2>Hosting:</h2>
           <EventsList
             host={true}

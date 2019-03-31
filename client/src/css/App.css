@@ -47,8 +47,40 @@ html {
   overflow: hidden;
 }
 
+/* Sidebar Nav */
+.sidebar-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #55495b;
+  border: .03em solid;
+  width: 100vw;
+  margin-left: -13%;
+  width: 20%;
+  height: 100%;
+}
 
 
+.sidebar-nav button {
+  font-size: 200%;
+  font-weight: 200;
+  color: #fff;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+
+.title-container {
+  padding-left: 20%;
+}
+
+.attending-hosting {
+  color: #55495b;
+}
 /* register button */
 #sign-in {
   margin-top: 2.5vh;
@@ -116,7 +148,4 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.event-name {
-
 }
