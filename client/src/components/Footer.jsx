@@ -8,18 +8,12 @@ const Footer = props => {
       <div className="footer-text">
         {show && (
           <>
-            <Link to="/home">Home</Link>
-
-            {currentUser &&
-              <>
-                <Link
-                to={"/user/" + currentUser.id + "/username/" + currentUser.username}
-                >
-                Profile
-                </Link>
-                <Link to="/logout">Logout</Link>
-              </>
-            }
+            <Link
+            to={"/user/" + currentUser.id + "/username/" + currentUser.username}
+            >
+            Profile
+            </Link>
+            <Link to="/logout">Logout</Link>
           </>
         )}
         <a href="https://github.com/DanThomp507/Everybody-Eats">github</a>

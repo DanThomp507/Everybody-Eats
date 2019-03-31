@@ -24,15 +24,16 @@ html {
   border-radius: 1em;
   width: 30vw;
   margin: 5% auto;
-  height: 550px;
+  height: 50vh;
   list-style-type: none;
-  font-size: 1.8em;
+  font-size: 100%;
   background-color: rgba(85, 73, 91, .7);
 }
 
 .user-form-container h1 {
   transform: rotate(-10deg);
-  font-size: 2.5em;
+  font-size: 300%;
+  text-align: center;
 }
 
 .login-button {
@@ -57,25 +58,6 @@ html {
   color: #fff;
   font-weight: 200;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .footer {
     position: fixed;
