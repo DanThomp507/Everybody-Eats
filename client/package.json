@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "google-maps-react": "^2.0.2",
+    "moment": "^2.24.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-places-autocomplete": "^7.2.1",
