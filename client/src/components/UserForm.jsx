@@ -23,50 +23,53 @@ export default props => {
   return (
     showRegister && (
       <div className="user-form-container">
-      <h1>Register</h1>
-      <form>
-        <input
-          onChange={onChange}
-          type="text"
-          placeholder="First Name"
-          name="first_name"
-          value={first_name}
-        />
-
-        <input
-          onChange={onChange}
-          type="text"
-          placeholder="Last Name"
-          name="last_name"
-          value={last_name}
-        />
-
-        <input
-          onChange={onChange}
-          type="text"
-          placeholder="Email"
-          name="email"
-          value={email}
-        />
-
-        <input
-          onChange={onChange}
-          type="text"
-          placeholder="Username"
-          name="username"
-          value={username}
-        />
-        {passwordAsk && (
-          <>
-        <input
-          onChange={onChange}
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-        />
-        </>
-      )}
+      <h1>{title}</h1>
+        <form>
+          <input
+            onChange={onChange}
+            type="text"
+            placeholder="First Name"
+            name="first_name"
+            value={first_name}
+          />
+          <br/>
+          <input
+            onChange={onChange}
+            type="text"
+            placeholder="Last Name"
+            name="last_name"
+            value={last_name}
+          />
+          <br/>
+          <input
+            onChange={onChange}
+            type="text"
+            placeholder="Email"
+            name="email"
+            value={email}
+          />
+          <br/>
+          <input
+            onChange={onChange}
+            type="text"
+            placeholder="Username"
+            name="username"
+            value={username}
+          />
+          <br/>
+          {passwordAsk && (
+            <>
+          <input
+            onChange={onChange}
+            type="password"
+            placeholder="Password"
+            name="password"
+            value={password}
+          />
+          <br/>
+          </>
+        )}
+          <br/>
           <button type="submit" onClick={onSubmit}>
             {submitButtonText}
           </button>

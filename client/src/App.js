@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 import { Link, Route, withRouter } from "react-router-dom";
 import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
@@ -35,6 +35,13 @@ class App extends Component {
       email: "",
       password: "",
     },
+    editFormData: {
+      first_name: "",
+      last_name: "",
+      username: "",
+      email: "",
+      password: "",
+    },
     loginFormData: {
       email: "",
       password: ""
@@ -50,30 +57,41 @@ class App extends Component {
   this.handleLoginFormChange = this.handleLoginFormChange.bind(this);
   this.handleLogout = this.handleLogout.bind(this);
   this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
+  this.handleEditUser = this.handleEditUser.bind(this);
   this.handleRegister = this.handleRegister.bind(this);
   this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
   this.userEvents = this.userEvents.bind(this);
+  this.updateUserEvents = this.updateUserEvents.bind(this);
 }
 
   async componentDidMount() {
     const currentUser = await verifyToken();
     const eventsList =  await this.userEvents(currentUser.id)
-    this.setState({
+    this.setState((prevState, newState) => ({
       currentUser,
-      eventsList
+      eventsList,
+      editFormData: {
+        first_name: currentUser.first_name,
+        last_name: currentUser.last_name,
+        username: currentUser.username,
+        email: currentUser.email,
+      }
     })
+    )
   }
 
   async handleLogin(e) {
   e.preventDefault();
   const currentUser = await loginUser(this.state.loginFormData);
-  console.log("userdata from handleLogin", currentUser);
+  console.log(currentUser);
+  const eventsList =  await this.userEvents(currentUser.user.id)
   this.setState({
     loginFormData: {
       email: "",
       password: ""
     },
-    currentUser: currentUser.user
+    eventsList,
+    currentUser: currentUser.user,
   });
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
@@ -113,6 +131,10 @@ handleRegisterFormChange(e) {
     registerFormData: {
       ...prevState.registerFormData,
       [name]: value
+    },
+    editFormData: {
+      ...prevState.editFormData,
+      [name]: value
     }
   }));
 }
@@ -120,8 +142,10 @@ async handleRegister(e) {
   e.preventDefault();
   const currentUser = await createNewUser(this.state.registerFormData);
   console.log(currentUser);
+  const eventsList =  await this.userEvents(currentUser.user.id)
   this.setState((prevState, newState) => ({
     currentUser: currentUser.user,
+    eventsList,
     registerFormData: {
       username: "",
       first_name: "",
@@ -130,6 +154,21 @@ async handleRegister(e) {
       password: ""
     }
   }));
+  this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
+}
+
+async handleEditUser(e) {
+  e.preventDefault()
+
+  const currentUser = await editUser(this.state.currentUser.id, this.state.editFormData)
+  const eventsList =  await this.userEvents(this.state.currentUser.id)
+  console.log(currentUser);
+  this.setState((prevState, newState) => ({
+    currentUser: currentUser.newUser,
+    eventsList,
+  }));
+  debugger
+
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
@@ -142,6 +181,15 @@ handleLogout() {
   this.props.history.push(`/`);
 }
 
+async updateUserEvents() {
+  const eventsList = await this.userEvents(this.state.currentUser.id)
+  debugger
+  this.setState({
+    eventsList: eventsList
+  });
+}
+
+
 async userEvents(id) {
   const eventsList = await fetchUserEvents(id);
   return eventsList
@@ -149,10 +197,7 @@ async userEvents(id) {
 
   render() {
     return (
-      <div className="Main-app-body">
-        <h1 className="main-title">
-          <Link to="/home">Everybody Eats</Link>
-        </h1>
+      <div className="main-app-body">
         <Route
           exact
           path="/"
@@ -183,7 +228,7 @@ async userEvents(id) {
               password={this.state.registerFormData.password}
               submitButtonText="Submit"
               backButtonText="Back to Login"
-              passwordAsk={"y"}
+              passwordAsk={true}
               toggleLocal={this.state.handleToggleLocalRegister}
             />
             </>
@@ -210,6 +255,31 @@ async userEvents(id) {
               onChange={this.handleEventFormChange}
               onSubmit={this.handleSubmit}
               currentUser={this.state.currentUser}
+              updateUserEvents={this.updateUserEvents}
+            />
+          )}
+        />
+        <Route
+          exact
+          path="/user/:user_id/edit/"
+          render={props => (
+            <UserForm
+              {...props}
+              title={"Edit User"}
+              onClick={this.handleLoginClick}
+              show={this.state.currentUser}
+              toggle={!this.state.toggleLogin}
+              onChange={this.handleRegisterFormChange}
+              onSubmit={this.handleEditUser}
+              first_name={this.state.editFormData.first_name}
+              last_name={this.state.editFormData.last_name}
+              username={this.state.editFormData.username}
+              email={this.state.editFormData.email}
+              password={this.state.registerFormData.password}
+              submitButtonText="Submit"
+              backButtonText="Back to Profile"
+              passwordAsk={false}
+              toggleLocal={this.state.handleToggleLocalRegister}
             />
           )}
         />

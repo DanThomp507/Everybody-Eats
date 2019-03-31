@@ -15,7 +15,7 @@ const fetchEvent = async event_id => {
   return respData.data;
 };
 const fetchEventUsers = async event_id => {
-  const respData = await api.get(`/guests/${event_id}`);
+  const respData = await api.get(`/events/${event_id}/guests`);
   return respData.data;
 };
 export {

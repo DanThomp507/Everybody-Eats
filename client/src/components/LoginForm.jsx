@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default props => {
   const { toggle, show, email, password, onChange, onSubmit, onClick } = props;
@@ -6,6 +7,9 @@ export default props => {
   return (
     showLogin && (
       <div className="user-form-container">
+        <h1 className="main-title">
+          <Link to="/home">Everybody <br/> Eats</Link>
+        </h1>
         <form>
           <h2>Login</h2>
           <div>
@@ -28,12 +32,14 @@ export default props => {
               value={password}
             />
           </div>
-          <button type="submit" onClick={onSubmit}>
+          <button id='sign-in' className='login-button' type="submit" onClick={onSubmit}>
             Sign In
           </button>
-          <button type="submit" onClick={onClick}>
-            Register
-          </button>
+          <p id='register'> Don't have an account?
+            <button className='login-button' type="submit" onClick={onClick}>
+              Register Here!
+            </button>
+          </p>
         </form>
       </div>
     )
