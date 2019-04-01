@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default props => {
-  const { toggle, show, email, password, onChange, onSubmit, onClick } = props;
+  const { toggle, show, email, password, onChange, onSubmit, onClick, register } = props;
   const showLogin = toggle;
   return (
     showLogin && (
@@ -36,7 +36,7 @@ export default props => {
             Sign In
           </button>
           <p id='register'> Don't have an account?
-            <button className='login-button' type="submit" onClick={onClick}>
+            <button className='login-button' type="submit" onClick={register}>
               Register Here!
             </button>
           </p>

@@ -55,6 +55,7 @@ class App extends Component {
   }
   this.handleLogin = this.handleLogin.bind(this);
   this.handleLoginClick = this.handleLoginClick.bind(this);
+  this.handleRegisterClick = this.handleRegisterClick.bind(this);
   this.handleLoginFormChange = this.handleLoginFormChange.bind(this);
   this.handleLogout = this.handleLogout.bind(this);
   this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
@@ -94,6 +95,13 @@ class App extends Component {
     currentUser: currentUser.user,
   });
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
+}
+
+handleRegisterClick(e) {
+  e.preventDefault();
+  this.setState((prevState, newState) => ({
+    toggleLogin: !prevState.toggleLogin
+  }));
 }
 
 handleLoginClick(e) {
@@ -211,6 +219,7 @@ async userEvents(id) {
                 email={this.state.loginFormData.email}
                 password={this.state.loginFormData.password}
                 onClick={this.handleLoginClick}
+                register={this.handleRegisterClick}
               />
             <UserForm
               {...props}
