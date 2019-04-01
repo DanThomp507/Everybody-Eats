@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://everybodyeatsapp.herokuapp.com'
+  baseURL: "https://everybodyeatsapp.herokuapp.com"
 });
 
 const updateToken = (token) => {
