@@ -105,11 +105,50 @@ html {
     font-weight: bolder;
     font-size: 16px;
   }
+.title-container {
+  color: #55495b;
+}
+.title-container h2 {
+  font-size: 2rem;
+  padding-right: 10%;
+}
+.title-container p {
+  font-size: 1.3rem;
+  padding-right: 10%;
+
+}
 .eventsList-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: left;
   background-color: rgba(145, 142, 145, 60%);
   height: 50vw;
+  margin: 0;
+}
+.sidebar-nav {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: #55495b;
+  border: .03em solid;
+  width: 100vw;
+  width: 20%;
+  height: 70vh;
+}
+.sidebar-nav button {
+  font-size: 200%;
+  font-weight: 200;
+  color: #fff;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+}
+.attending-hosting {
+ color: #55495b;
+ padding-left: 20%;
 }
 .create-event-title {
   text-align: center;
@@ -172,8 +211,6 @@ html {
 #user-submit {
   margin-right: .7vw;
 }
-
-
 .event-page {
  display: flex;
  justify-content: space-between;
