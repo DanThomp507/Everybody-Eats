@@ -1,5 +1,5 @@
 const { api } = require('./api_helper');
-const BASE_URL = "http://localhost:9000";
+const BASE_URL = "https://thawing-river-14142.herokuapp.com/";
 
 const createNewEvent = async event => {
   const respData = await api.post(`/events`, event);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:9000'
+  baseURL: 'https://thawing-river-14142.herokuapp.com/'
 });
 
 const updateToken = (token) => {
