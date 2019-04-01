@@ -4,6 +4,7 @@ const EventDateField = props => {
   const {
     event_date,
     handleEventFormChange,
+    handleFieldSubmit,
   } = props
   return (
     <div>
@@ -17,6 +18,7 @@ const EventDateField = props => {
         id="event_date"
         onChange={handleEventFormChange}
       />
+      <button type="submit" onClick={e => handleFieldSubmit(e)}>next</button>
     </div>
   )
 }
