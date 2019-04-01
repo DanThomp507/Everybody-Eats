@@ -66,14 +66,14 @@ class EventPage extends Component {
             <></>
             :
               this.state.attending?
-                <button onClick={async (e) => {
+                <button className="join-backout-button" onClick={async (e) => {
                   e.preventDefault()
                   await backoutEvent(this.props.userData.id, this.props.match.params.event_id)
                   await this.addUser()
                   this.isAttending()
                 }}>Backout</button>
               :
-                <button onClick={async (e) => {
+                <button className="join-backout-button" onClick={async (e) => {
                   e.preventDefault()
                   await joinEvent(this.props.userData.id, this.props.match.params.event_id)
                   await this.addUser()
