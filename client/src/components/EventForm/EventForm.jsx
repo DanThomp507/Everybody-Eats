@@ -144,6 +144,7 @@ class EventForm extends Component {
 
           {this.state.field === 5 &&
             <EventSubmitField
+              eventData={this.state.eventData}
               handleSubmit={this.handleSubmit}
               currentUser={this.props.currentUser}
             />
