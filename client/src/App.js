@@ -51,6 +51,7 @@ class App extends Component {
     currentEvent: {},
     eventData: {},
     eventsList: [],
+    showList: false
 
   }
   this.handleLogin = this.handleLogin.bind(this);
@@ -64,6 +65,7 @@ class App extends Component {
   this.handleRegisterFormChange = this.handleRegisterFormChange.bind(this);
   this.userEvents = this.userEvents.bind(this);
   this.updateUserEvents = this.updateUserEvents.bind(this);
+  this.changeList = this.changeList.bind(this);
 }
 
   async componentDidMount() {
@@ -196,6 +198,17 @@ async updateUserEvents() {
   });
 }
 
+changeList(button){
+  if (button === 'attending') {
+    this.setState((prevState, newState) => ({
+      showList: true
+    }))
+  } else if (button === 'hosting') {
+    this.setState((prevState, newState) => ({
+      showList: false
+    }))
+  }
+}
 
 async userEvents(id) {
   const eventsList = await fetchUserEvents(id);
@@ -248,6 +261,8 @@ async userEvents(id) {
         render={props => (
             <UserProfile
               {...props}
+              showList={this.state.showList}
+              changeList={this.changeList}
               currentUser={this.state.currentUser}
               eventsList={this.state.eventsList}
               hostingEventsList={this.state.hostingEventsList}

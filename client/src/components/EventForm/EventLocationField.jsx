@@ -18,7 +18,7 @@ const EventLocationField = props => {
       onSelect={handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div className='input-and-auto'>
+          <div className="event-name">
             <input
               {...getInputProps({
                 name: "event_location",

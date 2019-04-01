@@ -10,9 +10,13 @@ const EventSubmitField = props => {
   return (
     <div>
       <div>
+        <h3>Event Name:</h3>
         <p>{eventData.event_name}</p>
+        <h3>Event Location:</h3>
         <p>{eventData.event_location}</p>
+        <h3>Event Date and Time:</h3>
         <p>{eventData.event_date}</p>
+        <h3>Event Details:</h3>
         <p>{eventData.event_details}</p>
       </div>
       <button type="submit" onClick={(e) => {

@@ -7,7 +7,7 @@ const EventDateField = props => {
     handleFieldSubmit,
   } = props
   return (
-    <div>
+    <div className="event-name">
       <label htmlFor="event_date">
         Event Date
       </label>

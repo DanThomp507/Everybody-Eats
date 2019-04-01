@@ -30,23 +30,48 @@ const UserProfile = props => {
                   }>Create Event
               </button>
         </nav>
-        <div className='attending-hosting'>
-          <h2>Attending:</h2>
-          <EventsList
-            host={false}
-            eventsList={props.eventsList.filter((event) => {
-              return props.match.params.user_id != event.host_id
-            } )}
-          />
-        </div>
-        <div className='attending-hosting'>
-          <h2>Hosting:</h2>
-          <EventsList
-            host={true}
-            eventsList={props.eventsList.filter((event) => {
-              return props.match.params.user_id == event.host_id
-            } )}
-          />
+
+        {
+          props.showList?
+            <div className='attending-hosting'>
+              <h2>Attending:</h2>
+              <EventsList
+                host={false}
+                eventsList={props.eventsList.filter((event) => {
+                  return props.match.params.user_id != event.host_id
+                } )}
+              />
+            </div>
+            :
+            <div className='attending-hosting'>
+              <h2>Hosting:</h2>
+              <EventsList
+                host={true}
+                eventsList={props.eventsList.filter((event) => {
+                  return props.match.params.user_id == event.host_id
+                } )}
+              />
+            </div>
+        }
+        <div className="sidebar-nav">
+          <button
+            className="attending-button"
+            onClick={() => {
+              props.changeList('attending')
+              }
+            }
+          >
+          Attending
+          </button>
+          <button
+            className="hosting-button"
+            onClick={() => {
+              props.changeList('hosting')
+              }
+            }
+          >
+          Hosting
+          </button>
         </div>
       </div>
     </div>
