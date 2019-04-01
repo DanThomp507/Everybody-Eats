@@ -1,8 +1,14 @@
-body,
 html {
-  background-color: #c8a69a;
+  background-color: #e4d1c4;
+  background-image: url('./img/background2.png');
+  background-position: center;
+  background-size: contain;
   height: 100%;
   width: 100%;
+}
+
+.main-app-body {
+  font-family: 'helvetica'
 }
 
 /* login page and title. Also the main page. (for now) */
@@ -24,15 +30,19 @@ html {
   border-radius: 1em;
   width: 30vw;
   margin: 5% auto;
-  height: 550px;
+  height: 50vh;
   list-style-type: none;
-  font-size: 1.8em;
+  font-size: 100%;
   background-color: rgba(85, 73, 91, .7);
 }
 
 .user-form-container h1 {
   transform: rotate(-10deg);
-  font-size: 2.5em;
+  font-size: 600%;
+  text-align: center;
+  color: #b8837c;
+  font-family: 'Tangerine', cursive;
+  font-weight: 700;
 }
 
 .login-button {
@@ -44,7 +54,11 @@ html {
   overflow: hidden;
 }
 
-
+.title-container {
+  padding-left: 20%;
+  font-weight: 600;
+  font-size: 110%;
+}
 
 /* register button */
 #sign-in {
@@ -58,24 +72,19 @@ html {
   font-weight: 200;
 }
 
+/* email and password input */
+#email {
+  margin-left: .8em;
+}
 
+#password {
+  margin-top: 1em;
+  margin-left: .7em;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.email-password {
+  font-size: 130%;
+}
 
 .footer {
     position: fixed;
@@ -85,7 +94,7 @@ html {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: purple;
+    background-color: rgba(85, 73, 91, .9);
     z-index: 2;
   }
   .footer a {
@@ -99,4 +108,112 @@ html {
 .eventsList-container {
   display: flex;
   justify-content: space-around;
+  background-color: rgba(145, 142, 145, 60%);
+  height: 50vw;
+}
+.create-event-title {
+  text-align: center;
+  color: #55495b;
+  font-size: 230%;
+  padding-left: 20%;
+  margin: 10vh 0 2vh 0;
+}
+.event-form-container {
+  display: flex;
+  background: rgba(145, 142, 145, 60%);
+  height: 50vh;
+}
+.event-nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 20%;
+  justify-content: space-around;
+}
+.event-nav button {
+  height: 100%;
+  font-size: 200%;
+  font-weight: 200;
+  color: white;
+  background-color: #55495b;
+  border-right: none;
+}
+.event-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.event-name input {
+  border: 1px solid #979797;
+  border-radius: 10px;
+  width: 15vw;
+  height: 3vh;
+  font-size: 100%;
+  margin-bottom: 1vh;
+}
+
+#user-last {
+  margin-bottom: 1vh;
+}
+
+#user-email {
+  margin-bottom: 1vh;
+}
+
+#user-username {
+  margin-bottom: 1vh;
+}
+
+#user-name {
+  margin-bottom: 1vh;
+}
+
+#user-submit {
+  margin-right: .7vw;
+}
+
+
+.event-page {
+ display: flex;
+ justify-content: space-between;
+ background-color: rgba(145, 142, 145, 60%);
+ height: 30vw;
+ margin-bottom: 10vw;
+}
+.event-title {
+ text-align: center;
+ color: #55495b;
+ font-size: 260%;
+ padding-right: 20%;
+ margin: 10vh 0 2vh 0;
+}
+.attending-list {
+ background-color: #55495b;
+ width: 20%;
+ text-align: center;
+ color: white;
+ font-size: 1.8em;
+}
+
+.event-page {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(145, 142, 145, 60%);
+  height: 30vw;
+  margin-bottom: 10vw;
+}
+.event-title {
+  text-align: center;
+  color: #55495b;
+  font-size: 260%;
+  padding-right: 20%;
+  margin: 10vh 0 2vh 0;
+}
+.attending-list {
+  background-color: #55495b;
+  width: 20%;
+  text-align: center;
+  color: white;
+  font-size: 1.8em;
 }

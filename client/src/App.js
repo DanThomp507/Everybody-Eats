@@ -3,7 +3,7 @@ import './css/App.css';
 import { Link, Route, withRouter } from "react-router-dom";
 import UserForm from './components/UserForm';
 import LoginForm from "./components/LoginForm";
-import EventForm from './components/EventForm';
+import EventForm from './components/EventForm/EventForm';
 import EventPage from './components/EventPage';
 import LogoutForm from './components/LogoutForm';
 import UserProfile from './components/UserProfile';
@@ -51,6 +51,7 @@ class App extends Component {
     currentEvent: {},
     eventData: {},
     eventsList: [],
+    show: false
   }
   this.handleLogin = this.handleLogin.bind(this);
   this.handleLoginClick = this.handleLoginClick.bind(this);
@@ -92,6 +93,7 @@ class App extends Component {
     },
     eventsList,
     currentUser: currentUser.user,
+    show: true,
   });
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
@@ -152,14 +154,14 @@ async handleRegister(e) {
       last_name: "",
       email: "",
       password: ""
-    }
+    },
+    show: true
   }));
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
 async handleEditUser(e) {
   e.preventDefault()
-
   const currentUser = await editUser(this.state.currentUser.id, this.state.editFormData)
   const eventsList =  await this.userEvents(this.state.currentUser.id)
   console.log(currentUser);
@@ -176,7 +178,8 @@ handleLogout() {
   localStorage.removeItem("authToken");
   this.setState({
     currentUser: {},
-    toggleLogin: true
+    toggleLogin: true,
+    show: false
   });
   this.props.history.push(`/`);
 }
@@ -251,9 +254,6 @@ async userEvents(id) {
           path="/events/:user_id/new"
           render={() => (
             <EventForm
-              eventData={this.state.eventData}
-              onChange={this.handleEventFormChange}
-              onSubmit={this.handleSubmit}
               currentUser={this.state.currentUser}
               updateUserEvents={this.updateUserEvents}
             />
@@ -301,7 +301,7 @@ async userEvents(id) {
       />
       <Footer
           handleLogout={this.handleLogout}
-          show={this.state.currentUser}
+          show={this.state.show}
           currentUser={this.state.currentUser}
         />
       </div>
