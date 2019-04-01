@@ -11,7 +11,7 @@ const EventsList = props => {
           <div key={index} className="event-container">
             <div className="event-information">{event.event_name}</div>
             {props.host && (
-              <div className="event-link">invite link: {`http://localhost:3000/events/${event.id}`}</div>
+              <div className="event-link">invite link: {`http://http://everybodyeats.surge.sh/events/${event.id}`}</div>
             )}
             <div className="event-buttons-container">
               <button
