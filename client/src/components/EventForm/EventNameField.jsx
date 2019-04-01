@@ -7,7 +7,6 @@ const EventNameField = props => {
   } = props
   return (
     <div className="event-name">
-      <label htmlFor="name">Name</label>
       <input
         type="text"
         placeholder="Name"
