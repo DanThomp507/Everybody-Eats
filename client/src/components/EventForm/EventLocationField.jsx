@@ -7,6 +7,7 @@ const EventLocationField = props => {
     event_location,
     handleChange,
     handleSelect,
+    handleFieldSubmit,
   } = props
   return(
     <div>
@@ -45,6 +46,8 @@ const EventLocationField = props => {
           </div>
         )}
       </PlacesAutocomplete>
+
+      <button type="submit" onClick={e => handleFieldSubmit(e)}>next</button>
     </div>
   )
 }

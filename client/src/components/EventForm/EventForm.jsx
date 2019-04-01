@@ -92,6 +92,7 @@ class EventForm extends Component {
   async componentDidMount() {
     console.log('url params:', this.props.match.params);
     this.setState(prevState => ({
+      field: 1,
       eventData: {
         ...prevState.eventData,
         host_id: this.props.match.params.user_id
@@ -122,6 +123,7 @@ class EventForm extends Component {
               event_location={this.state.eventData.event_location}
               handleChange={this.handleChange}
               handleSubmit={this.handleSubmit}
+              handleFieldSubmit={this.handleFieldSubmit}
             />
           }
 
@@ -129,6 +131,7 @@ class EventForm extends Component {
             <EventDateField
               event_date={this.state.eventData.event_date}
               handleEventFormChange={this.handleEventFormChange}
+              handleFieldSubmit={this.handleFieldSubmit}
             />
           }
 
