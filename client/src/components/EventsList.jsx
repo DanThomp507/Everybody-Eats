@@ -8,6 +8,7 @@ const EventsList = props => {
     <div className="events-list-container">
       {eventsList &&
         eventsList.map((event, index) => (
+
           <div key={index} className="event-container">
             <div className="event-information">{event.event_name}</div>
             {props.host && (
