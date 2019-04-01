@@ -174,8 +174,26 @@ html {
 }
 
 
-.test {
-  display: flex;
+.event-page {
+ display: flex;
+ justify-content: space-between;
+ background-color: rgba(145, 142, 145, 60%);
+ height: 30vw;
+ margin-bottom: 10vw;
+}
+.event-title {
+ text-align: center;
+ color: #55495b;
+ font-size: 260%;
+ padding-right: 20%;
+ margin: 10vh 0 2vh 0;
+}
+.attending-list {
+ background-color: #55495b;
+ width: 20%;
+ text-align: center;
+ color: white;
+ font-size: 1.8em;
 }
 
 .event-page {
