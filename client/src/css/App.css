@@ -220,6 +220,10 @@ html {
  height: 30vw;
  margin-bottom: 10vw;
 }
+.event-info {
+  padding-left: 5%;
+  padding-top: 2%;
+}
 .event-title {
  text-align: center;
  color: #55495b;
@@ -259,12 +263,15 @@ html {
   font-size: 200%;
   font-weight: 200;
   color: #fff;
-  background-color: Transparent;
+  background-color: #55495b;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   height: 4vh;
+  padding: 1% 1% 3% 1%;
   margin-top: 20vh;
   outline: none;
+
 }
 .attending-hosting h2 {
   font-size: 2rem;

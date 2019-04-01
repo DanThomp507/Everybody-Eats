@@ -21,24 +21,20 @@ class EventPage extends Component {
     };
   }
 
-  isAttending() {
-    this.state.guestList.map(guest => {
+  async isAttending() {
+    const guestList = await fetchEventUsers(this.props.match.params.event_id);
+    guestList.map(guest => {
       if (this.props.userData.id == guest.id) {
         this.setState((prevState, newState) => ({
-          attending: true
+          attending: true,
+          guestList
         }))
       } else {
         this.setState((prevState, newState) => ({
-          attending: false
+          attending: false,
+          guestList
         }))
       }
-    })
-  }
-
-  async addUser() {
-    const guestList = await fetchEventUsers(this.props.match.params.event_id);
-    this.setState({
-      guestList
     })
   }
 
@@ -56,7 +52,7 @@ class EventPage extends Component {
         <>
         <h1 className="event-title">{this.state.eventData.event_name}</h1>
         <div className='event-page'>
-          <div>
+          <div className="event-info">
             <h2>{this.state.eventData.event_location}</h2>
             <h2>{Moment(this.state.eventData.event_date).format("LLL")}</h2>
             <h2>{this.state.eventData.event_details}</h2>
@@ -69,15 +65,13 @@ class EventPage extends Component {
                 <button className="join-backout-button" onClick={async (e) => {
                   e.preventDefault()
                   await backoutEvent(this.props.userData.id, this.props.match.params.event_id)
-                  await this.addUser()
-                  this.isAttending()
+                  await this.isAttending()
                 }}>Backout</button>
               :
                 <button className="join-backout-button" onClick={async (e) => {
                   e.preventDefault()
                   await joinEvent(this.props.userData.id, this.props.match.params.event_id)
-                  await this.addUser()
-                  this.isAttending()
+                  await this.isAttending()
                 }}>Join Event</button>
           }
           <div className="attending-list">
