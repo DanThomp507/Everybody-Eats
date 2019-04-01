@@ -139,7 +139,7 @@ html {
 
 
 
-  /* .footer {
+  .footer {
     position: fixed;
     bottom: 0vh;
     width: 100vw;
@@ -149,7 +149,7 @@ html {
     align-items: center;
     background-color: rgba(85, 73, 91, .8);
     z-index: 2;
-  } */
+  }
 
   .footer a {
     display: flex;
