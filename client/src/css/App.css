@@ -9,9 +9,14 @@ html {
 }
 
 .main-app-body {
-  font-family: 'helvetica'
+  font-family: 'helvetica';
+  font-size: 1rem;
 }
-
+.main-title {
+  margin-top: 5%;
+  text-shadow: 5px 10px 5px rgba(0, 0, 0, 0.6);
+  overflow-wrap: break-word;
+}
 /* login page and title. Also the main page. (for now) */
 .user-form-container a {
   text-decoration: none;
