@@ -53,9 +53,10 @@ class EventPage extends Component {
 	  }
  render() {
 	    return(
+        <>
+        <h1 className="event-title">{this.state.eventData.event_name}</h1>
         <div className='event-page'>
           <div>
-    	      <h1>{this.state.eventData.event_name}</h1>
             <h2>{this.state.eventData.event_location}</h2>
             <h2>{Moment(this.state.eventData.event_date).format("LLL")}</h2>
             <h2>{this.state.eventData.event_details}</h2>
@@ -79,11 +80,14 @@ class EventPage extends Component {
                   this.isAttending()
                 }}>Join Event</button>
           }
-          <h3>Confirmed Guests:</h3>
-          <AttendingUsers
-            guestList={this.state.guestList}
+          <div className="attending-list">
+            <h3>Confirmed Guests:</h3>
+            <AttendingUsers
+              guestList={this.state.guestList}
             />
-        </div>
+          </div>
+      </div>
+        </>
 	    )
 	  }
 	}
