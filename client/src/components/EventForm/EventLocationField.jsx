@@ -11,7 +11,6 @@ const EventLocationField = props => {
   } = props
   return(
     <div>
-      <label htmlFor="location">Event Location</label>
       <PlacesAutocomplete
       value={event_location}
       onChange={handleChange}
@@ -46,8 +45,7 @@ const EventLocationField = props => {
           </div>
         )}
       </PlacesAutocomplete>
-
-      <button type="submit" onClick={e => handleFieldSubmit(e)}>next</button>
+      <button className="autoComplete-button" type="submit" onClick={e => handleFieldSubmit(e)}>next</button>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 
 const EventsList = props => {
   const { eventsList } = props;
@@ -12,7 +13,12 @@ const EventsList = props => {
           <div key={index} className="event-container">
             <div className="event-information">{event.event_name}</div>
             {props.host && (
-              <div className="event-link">invite link: {`http://everybodyeats.surge.sh/events/${event.id}`}</div>
+              <>
+                <div className="event-link">Click Link to Copy</div>
+                <CopyToClipboard text={`http://everybodyeats.surge.sh/events/${event.id}`}>
+                    <button className="copy-link">{`http://everybodyeats.surge.sh/events/${event.id}`}</button>
+                </CopyToClipboard>
+              </>
             )}
             <div className="event-buttons-container">
               <button
