@@ -14,7 +14,6 @@ const EventNameField = props => {
         value={event_name}
         id="event_name"
         onChange={handleEventFormChange}
-        onSubmit={e => handleFieldSubmit(e)}
       />
     </div>
   )

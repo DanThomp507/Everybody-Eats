@@ -51,10 +51,11 @@ class App extends Component {
     currentEvent: {},
     eventData: {},
     eventsList: [],
-    show: false
+
   }
   this.handleLogin = this.handleLogin.bind(this);
   this.handleLoginClick = this.handleLoginClick.bind(this);
+  this.handleRegisterClick = this.handleRegisterClick.bind(this);
   this.handleLoginFormChange = this.handleLoginFormChange.bind(this);
   this.handleLogout = this.handleLogout.bind(this);
   this.handleToggleLocalRegister = this.handleToggleLocalRegister.bind(this);
@@ -84,7 +85,6 @@ class App extends Component {
   async handleLogin(e) {
   e.preventDefault();
   const currentUser = await loginUser(this.state.loginFormData);
-  console.log(currentUser);
   const eventsList =  await this.userEvents(currentUser.user.id)
   this.setState({
     loginFormData: {
@@ -93,21 +93,27 @@ class App extends Component {
     },
     eventsList,
     currentUser: currentUser.user,
-    show: true,
   });
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
 
-handleLoginClick(e) {
+handleRegisterClick(e) {
   e.preventDefault();
-  console.log("I want to register: handleLoginClick button".toggleLogin);
   this.setState((prevState, newState) => ({
     toggleLogin: !prevState.toggleLogin
   }));
 }
+
+handleLoginClick(e) {
+  e.preventDefault();
+  this.setState((prevState, newState) => ({
+    toggleLogin: !prevState.toggleLogin
+  }));
+  this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`)
+}
+
 handleToggleLocalRegister(e) {
   e.preventDefault();
-  console.log("I want to toggleLocal: handleLoginClick button".toggleLogin);
   const { name, value } = e.target;
   this.setState((prevState, newState) => ({
     registerFormData: {
@@ -155,7 +161,6 @@ async handleRegister(e) {
       email: "",
       password: ""
     },
-    show: true
   }));
   this.props.history.push(`/user/${this.state.currentUser.id}/username/${this.state.currentUser.username}`);
 }
@@ -179,7 +184,6 @@ handleLogout() {
   this.setState({
     currentUser: {},
     toggleLogin: true,
-    show: false
   });
   this.props.history.push(`/`);
 }
@@ -208,19 +212,20 @@ async userEvents(id) {
             <>
               <LoginForm
                 {...props}
-                show={this.state.currentUser}
+                show={this.state.currentUser.id}
                 toggle={this.state.toggleLogin}
                 onChange={this.handleLoginFormChange}
                 onSubmit={this.handleLogin}
                 email={this.state.loginFormData.email}
                 password={this.state.loginFormData.password}
                 onClick={this.handleLoginClick}
+                register={this.handleRegisterClick}
               />
             <UserForm
               {...props}
               title={"Register User"}
               onClick={this.handleLoginClick}
-              show={this.state.currentUser}
+              show={this.state.currentUser.id}
               toggle={this.state.toggleLogin}
               onChange={this.handleRegisterFormChange}
               onSubmit={this.handleRegister}
@@ -267,7 +272,7 @@ async userEvents(id) {
               {...props}
               title={"Edit User"}
               onClick={this.handleLoginClick}
-              show={this.state.currentUser}
+              show={this.state.currentUser.id}
               toggle={!this.state.toggleLogin}
               onChange={this.handleRegisterFormChange}
               onSubmit={this.handleEditUser}
@@ -301,7 +306,7 @@ async userEvents(id) {
       />
       <Footer
           handleLogout={this.handleLogout}
-          show={this.state.show}
+          show={this.state.currentUser.id}
           currentUser={this.state.currentUser}
         />
       </div>
