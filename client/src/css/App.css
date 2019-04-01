@@ -7,6 +7,10 @@ html {
   width: 100%;
 }
 
+.main-app-body {
+  font-family: 'helvetica'
+}
+
 /* login page and title. Also the main page. (for now) */
 .user-form-container a {
   text-decoration: none;
@@ -34,8 +38,11 @@ html {
 
 .user-form-container h1 {
   transform: rotate(-10deg);
-  font-size: 300%;
+  font-size: 600%;
   text-align: center;
+  color: #b8837c;
+  font-family: 'Tangerine', cursive;
+  font-weight: 700;
 }
 
 .login-button {
@@ -48,6 +55,14 @@ html {
 }
 
 
+<<<<<<< HEAD
+=======
+.title-container {
+  padding-left: 20%;
+  font-weight: 600;
+  font-size: 110%;
+}
+>>>>>>> 1a9ad1cfc92be01e1fe3fb60a4288ec4d73aa4d6
 
 /* register button */
 #sign-in {
@@ -61,6 +76,20 @@ html {
   font-weight: 200;
 }
 
+/* email and password input */
+#email {
+  margin-left: .8em;
+}
+
+#password {
+  margin-top: 1em;
+  margin-left: .7em;
+}
+
+.email-password {
+  font-size: 130%;
+}
+
 .footer {
     position: fixed;
     bottom: 0vh;
@@ -69,7 +98,7 @@ html {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background-color: purple;
+    background-color: rgba(85, 73, 91, .9);
     z-index: 2;
   }
   .footer a {
@@ -84,7 +113,11 @@ html {
   display: flex;
   justify-content: space-around;
   background-color: rgba(145, 142, 145, 60%);
+<<<<<<< HEAD
   height: 50vw;
+=======
+  height: 50vh;
+>>>>>>> 1a9ad1cfc92be01e1fe3fb60a4288ec4d73aa4d6
 }
 .create-event-title {
   text-align: center;
@@ -119,10 +152,42 @@ html {
   justify-content: center;
   align-items: center;
 }
+<<<<<<< HEAD
 .event-name input {
   border: 1px solid #979797;
   border-radius: 10px;
   width: 15vw;
   height: 3vh;
   font-size: 100%;
+=======
+
+
+#user-name {
+  margin-bottom: 1vh;
+}
+
+#user-last {
+  margin-bottom: 1vh;
+}
+
+#user-email {
+  margin-bottom: 1vh;
+}
+
+#user-username {
+  margin-bottom: 1vh;
+}
+
+#user-name {
+  margin-bottom: 1vh;
+}
+
+#user-submit {
+  margin-right: .7vw;
+}
+
+
+.test {
+  display: flex;
+>>>>>>> 1a9ad1cfc92be01e1fe3fb60a4288ec4d73aa4d6
 }
