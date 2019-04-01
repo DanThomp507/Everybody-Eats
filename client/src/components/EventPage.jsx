@@ -53,35 +53,41 @@ class EventPage extends Component {
 	  }
  render() {
 	    return(
-	      <>
-	      <h1>{this.state.eventData.event_name}</h1>
-        <h2>{this.state.eventData.event_location}</h2>
-        <h2>{Moment(this.state.eventData.event_date).format("LLL")}</h2>
-        <h2>{this.state.eventData.event_details}</h2>
-        {
-          (this.props.userData.id == this.state.eventData.host_id)?
-          <></>
-          :
-            this.state.attending?
-              <button onClick={async (e) => {
-                e.preventDefault()
-                await backoutEvent(this.props.userData.id, this.props.match.params.event_id)
-                await this.addUser()
-                this.isAttending()
-              }}>Backout</button>
+        <>
+        <h1 className="event-title">{this.state.eventData.event_name}</h1>
+        <div className='event-page'>
+          <div>
+            <h2>{this.state.eventData.event_location}</h2>
+            <h2>{Moment(this.state.eventData.event_date).format("LLL")}</h2>
+            <h2>{this.state.eventData.event_details}</h2>
+          </div>
+          {
+            (this.props.userData.id == this.state.eventData.host_id)?
+            <></>
             :
-              <button onClick={async (e) => {
-                e.preventDefault()
-                await joinEvent(this.props.userData.id, this.props.match.params.event_id)
-                await this.addUser()
-                this.isAttending()
-              }}>Join Event</button>
-        }
-        <h3>Confirmed Guests:</h3>
-        <AttendingUsers
-          guestList={this.state.guestList}
-          />
-	      </>
+              this.state.attending?
+                <button onClick={async (e) => {
+                  e.preventDefault()
+                  await backoutEvent(this.props.userData.id, this.props.match.params.event_id)
+                  await this.addUser()
+                  this.isAttending()
+                }}>Backout</button>
+              :
+                <button onClick={async (e) => {
+                  e.preventDefault()
+                  await joinEvent(this.props.userData.id, this.props.match.params.event_id)
+                  await this.addUser()
+                  this.isAttending()
+                }}>Join Event</button>
+          }
+          <div className="attending-list">
+            <h3>Confirmed Guests:</h3>
+            <AttendingUsers
+              guestList={this.state.guestList}
+            />
+          </div>
+      </div>
+        </>
 	    )
 	  }
 	}

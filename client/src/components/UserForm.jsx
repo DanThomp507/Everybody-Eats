@@ -26,6 +26,7 @@ export default props => {
       <h1>{title}</h1>
         <form>
           <input
+            id='user-name'
             onChange={onChange}
             type="text"
             placeholder="First Name"
@@ -34,6 +35,7 @@ export default props => {
           />
           <br/>
           <input
+            id='user-last'
             onChange={onChange}
             type="text"
             placeholder="Last Name"
@@ -42,6 +44,7 @@ export default props => {
           />
           <br/>
           <input
+            id='user-email'
             onChange={onChange}
             type="text"
             placeholder="Email"
@@ -50,6 +53,7 @@ export default props => {
           />
           <br/>
           <input
+            id='user-username'
             onChange={onChange}
             type="text"
             placeholder="Username"
@@ -60,6 +64,7 @@ export default props => {
           {passwordAsk && (
             <>
           <input
+            id='user-password'
             onChange={onChange}
             type="password"
             placeholder="Password"
@@ -70,10 +75,10 @@ export default props => {
           </>
         )}
           <br/>
-          <button type="submit" onClick={onSubmit}>
+          <button id='user-submit' type="submit" onClick={onSubmit}>
             {submitButtonText}
           </button>
-          <button type="submit" onClick={onClick}>
+          <button id='user-back' type="submit" onClick={onClick}>
             {backButtonText}
           </button>
         </form>
