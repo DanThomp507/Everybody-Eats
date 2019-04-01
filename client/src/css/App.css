@@ -222,3 +222,15 @@ html {
  color: white;
  font-size: 1.8em;
 }
+
+.join-backout-button {
+  font-size: 200%;
+  font-weight: 200;
+  color: #fff;
+  background-color: Transparent;
+  border: none;
+  cursor: pointer;
+  height: 4vh;
+  margin-top: 20vh;
+  outline: none;
+}
