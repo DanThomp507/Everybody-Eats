@@ -9,9 +9,8 @@ html {
 }
 
 .main-app-body {
-  font-family: 'helvetica'
+  font-family: 'helvetica';
 }
-
 /* login page and title. Also the main page. (for now) */
 .user-form-container a {
   text-decoration: none;
@@ -31,36 +30,11 @@ html {
   border-radius: 1em;
   width: 30vw;
   margin: 5% auto;
-  height: 50vh;
+  height: 30%;
   list-style-type: none;
   font-size: 100%;
   background-color: rgba(85, 73, 91, .7);
 }
-
-.user-form-container h1 {
-  transform: rotate(-10deg);
-  font-size: 600%;
-  text-align: center;
-  color: #b8837c;
-  font-family: 'Tangerine', cursive;
-  font-weight: 700;
-}
-
-.login-button {
-  font-size: 1.2rem;
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-}
-
-.title-container {
-  padding-left: 20%;
-  font-weight: 600;
-  font-size: 110%;
-}
-
 /* register button */
 #sign-in {
   margin-top: 2.5vh;
@@ -72,21 +46,42 @@ html {
   color: #fff;
   font-weight: 200;
 }
-
-/* email and password input */
-#email {
-  margin-left: .8em;
+.user-form-container form {
+  width: 100%;
+  height: 100%;
 }
-
-#password {
-  margin-top: 1em;
-  margin-left: .7em;
+.email-password input {
+  height: 100%;
+  width: 50%;
 }
-
-.email-password {
+.email-password label {
+  height: 100%;
+  width: 50%;
   font-size: 130%;
+  margin-right: 2%;
 }
-
+.user-form-container h1 {
+  height: 40%;
+  width: 100%;
+  transform: rotate(-10deg);
+  font-size: 550%;
+  text-align: center;
+  color: #b8837c;
+  font-family: 'Tangerine', cursive;
+  font-weight: 700;
+}
+.main-title {
+  margin: 5% 0 0 0;
+  text-shadow: 5px 10px 5px rgba(0, 0, 0, 0.6);
+}
+.login-button {
+  font-size: 1.2rem;
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+}
 .footer {
     position: fixed;
     bottom: 0vh;
@@ -122,7 +117,7 @@ html {
   display: flex;
   justify-content: space-between;
   background-color: rgba(145, 142, 145, 60%);
-  height: 50vw;
+  height: 50vh;
   margin: 0;
 }
 .sidebar-nav {
@@ -132,8 +127,8 @@ html {
   background-color: #55495b;
   border: .03em solid;
   width: 100vw;
-  width: 20%;
-  height: 70vh;
+  width: 25%;
+  height: 50vh;
 }
 .sidebar-nav button {
   font-size: 200%;
@@ -150,13 +145,15 @@ html {
 .attending-hosting {
  color: #55495b;
  width: 100%;
+ height: 100%;
+ overflow: scroll;
 }
 .create-event-title {
   text-align: center;
   color: #55495b;
   font-size: 230%;
   padding-left: 20%;
-  margin: 10vh 0 2vh 0;
+  margin: 10vh 0 4vh 0;
 }
 .event-form-container {
   display: flex;
@@ -187,13 +184,22 @@ html {
 .event-name input {
   border: 1px solid #979797;
   border-radius: 10px;
-  width: 15vw;
-  height: 3vh;
+  width: 30vw;
+  height: 6vh;
   font-size: 100%;
   margin-bottom: 1vh;
   text-align: center;
 }
-
+.event-name button {
+  background-color: transparent;
+  color: transparent;
+  border: none;
+}
+.autocomplete-button {
+  background-color: transparent;
+  color: transparent;
+  border: none;
+}
 #user-last {
   margin-bottom: 1vh;
 }
@@ -277,13 +283,24 @@ html {
   font-size: 2rem;
   text-align: center;
 }
+.event-buttons-container {
+  display: flex;
+  justify-content: center;
+}
 .event-button {
   margin-top: 1vh;
-  font-size: 200%;
+  font-size: 150%;
   font-weight: 300;
   color: #fff;
   background-color: Transparent;
   border: none;
+  cursor: pointer;
+  outline: none;
+}
+.event-button:hover {
+  color: #fff;
+  background-color: rgba(145, 142, 145, 90%);
+  border-radius: 10px;
   cursor: pointer;
   outline: none;
 }
@@ -300,5 +317,23 @@ html {
 }
 
 .event-link {
-  font-size: 1.3em;
+  font-size: 1em;
+  text-align: center;
+}
+.copy-link {
+  font-size: 1em;
+  background-color: transparent;
+  border: none;
+  color: #55495b;
+  outline: none;
+}
+.copy-link:hover {
+  background-color: rgba(145, 142, 145, 90%);
+  border-radius: 10px;
+  color: white;
+}
+.copy-link:focus {
+  background-color: rgba(145, 142, 145, 90%);
+  border-radius: 10px;
+  color: white;
 }

@@ -8,7 +8,6 @@ const EventDetailField = props => {
 
   return (
     <div className="event-name">
-      <label htmlFor="event_details">Event Details</label>
       <input
         type="text"
         name="event_details"

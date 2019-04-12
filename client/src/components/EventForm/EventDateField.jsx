@@ -8,9 +8,6 @@ const EventDateField = props => {
   } = props
   return (
     <div className="event-name">
-      <label htmlFor="event_date">
-        Event Date
-      </label>
       <input
         type="datetime-local"
         name="event_date"
